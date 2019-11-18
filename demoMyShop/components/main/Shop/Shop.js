@@ -23,7 +23,6 @@ import Cart from './Cart/Cart';
 import Search from './Search/Search';
 import Contact from './Contact/Contact';
 import Header from './header';
-import { number } from 'C:/Users/Administrator/AppData/Local/Microsoft/TypeScript/3.6/node_modules/@types/prop-types';
 
 
 position = new Animated.Value(0);
@@ -37,6 +36,7 @@ type Route = {
 };
 
 type State = NavigationState<Route>;
+
 
 export default class Shop extends React.Component<{}, State>{
 
@@ -120,9 +120,18 @@ export default class Shop extends React.Component<{}, State>{
       () => saveCart(this.state.carts));
 
   }
-  gotoSearch = (index: number) =>{
+  gotoSearch (index: number){
     this.setState({
-      index :3,
+      index,
+      routes: [
+        {
+          key: 'search',
+          title: 'search',
+          icon: 'ios-search',
+          color: [0, 132, 255],
+  
+        },
+      ]
     });
     global.gotoSearch()
   }
@@ -147,7 +156,7 @@ export default class Shop extends React.Component<{}, State>{
 
   handleIndexChange = (index: number) =>
     this.setState({
-      index : number,
+      index,
     });
 
   renderIndicator = (
@@ -271,7 +280,7 @@ export default class Shop extends React.Component<{}, State>{
               home: () => <Home types={types} topProducts={topProducts} />,
               contacts: Contact,
               cart: () => <Cart carts={carts} />,
-              search: () => <Search />,
+              search: Search,
             })}
             renderTabBar={this.renderTabBar}
             tabBarPosition="bottom"

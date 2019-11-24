@@ -10,9 +10,9 @@ import ChangeInFor from './components/ChangeInFor/ChangeInFor';
 import Login from './components/Authentication/Login'
 import Signup from './components/Authentication/Signup'
 //thu
-import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
+// import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
 
-const Tab = createMaterialBottomTabNavigator();
+// const Tab = createMaterialBottomTabNavigator();
 export default function App() {
   return (
    

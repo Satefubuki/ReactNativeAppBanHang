@@ -1,14 +1,11 @@
 import React, {Component } from 'react';
 //import { Video } from 'expo-av';
 import { Video } from 'expo-av';
-import { MaterialIcons, Octicons } from '@expo/vector-icons';
 import { 
-    Alert, Text, StyleSheet, Image, Dimensions, ScrollView, TouchableOpacity, StatusBar, WebView
+    Alert, Text, StyleSheet, Image, Dimensions, ScrollView, TouchableOpacity, StatusBar, Button, WebView
 } from 'react-native';
 import { View } from 'react-native-animatable';
-import LinkV from '../../../../assets/video/son.mp4'
 
-const local = require('../../../../assets/video/son.mp4');
 export default class VideoPlayer extends React.Component {
     state = {
     mute: false,
@@ -40,45 +37,32 @@ export default class VideoPlayer extends React.Component {
   //   });
   // }
   render() {
-    const fff = 'son.mp4'
     const { navigation } = this.props;
     const link = navigation.getParam('uri', '');
     const title = navigation.getParam('title', '');
     const channel = navigation.getParam('channel', '');
     const description = navigation.getParam('description', '');
     const logo = navigation.getParam('logo', '');
-    function vname(li) {
-      var jsonObj = JSON.stringify(li);
-      var obj = JSON.parse(jsonObj);
-      return obj.link + '';
-     
-    };
-    const ggg = vname({link});
 
     const { width } = Dimensions.get('window');	  
     return (
-    // <View>
-    //   <View animation="fadeInLeft" delay={500} useNativeDriver style={{width: '100%', height:300}}>
-    //     <WebView
-    //     style={{flex:1}}
-    //     javaScriptEnabled={true}
-    //     domStorageEnabled={true}
-    //     source={{uri: 'https://www.youtube.com/embed/At2J9p5KYtg'}}
-    //   />
-      
-    // </View>
     <View>
-    <View animation="fadeInLeft" delay={500} useNativeDriver>
-        <Video
+    <View animation="fadeInLeft" delay={500} useNativeDriver style={{width: '100%', height:300}}>
+        {/* <Video
           useNativeControls={true}
           ref={ref => this.video = ref}
           resizeMode="contain"
-         // source={{uri: link}}
-          source={{uri:`../../../../assets/video/son.mp4`}}
+          source={{uri: link}}
           shouldPlay={true}
           style={{width: '100%', height: 250}}
-        />
-        <Text>{vname({link})}.{fff}</Text>
+        /> */}
+        <WebView
+        style={{flex:1}}
+        javaScriptEnabled={true}
+        domStorageEnabled={true}
+        source={{uri: link}}
+      />
+      
     </View>
     <View animation="fadeInRight" delay={500} useNativeDriver>
     <Text style={{paddingLeft: 20,paddingRight:20, paddingBottom:10, paddingTop: 10, fontSize:20, fontWeight:'bold'}}>{title}</Text>

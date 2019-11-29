@@ -63,6 +63,12 @@ export default class Signup extends Component {
         // .catch(err => console.log(err));
     }
 
+    checkRePass=(p, r)=>{
+        if(p ===r)
+            return true;
+        return false;
+    }
+
     render() {
         const { wapper, imageback, box1, box2,box3,
             text, text1, textInput, button, icon, iconimg
@@ -89,6 +95,8 @@ export default class Signup extends Component {
                                 autoCorrect={false}
                             />
                         </View>
+                        {(this.props.usernameValidation(this.state.username)|| this.state.username=='' )?<Text style={{height:0}}></Text>:
+                        <Text style={styles.err}>Username is invalid</Text>}
                         <View style={textInput}>
                             <Image style={iconInput} source={email}></Image>
                             <TextInput
@@ -99,6 +107,8 @@ export default class Signup extends Component {
                                 autoCorrect={false}
                             />
                         </View>
+                        {(this.props.emailValidation(this.state.email)|| this.state.email=='' )?<Text style={{height:0}}></Text>:
+                        <Text style={styles.err}>Email is invalid</Text>}
                         <View style={textInput}>
                             <Image style={iconInput} source={Iconpass}></Image>
                             <TextInput
@@ -110,6 +120,8 @@ export default class Signup extends Component {
                                 autoCorrect={false}
                             />
                         </View>
+                        {(this.props.passwordValidation(this.state.password)|| this.state.password=='' )?<Text style={{height:0}}></Text>:
+                        <Text style={styles.err}>Password must contain at least 1 number and capital character</Text>}
                         <View style={textInput}>
                             <Image style={iconInput} source={Iconpass}></Image>
                             <TextInput
@@ -122,6 +134,8 @@ export default class Signup extends Component {
                                 
                             />
                         </View>
+                        {(this.checkRePass(this.state.password, this.state.repass)|| this.state.repass=='' )?<Text style={{height:0}}></Text>:
+                        <Text style={styles.err}>Re-type password is not correct</Text>}
                         <TouchableOpacity style={button} onPress={this.registerUser.bind(this)}>
                             <Text style={text1}>SIGN UP</Text>
                         </TouchableOpacity>
@@ -256,6 +270,10 @@ const styles = StyleSheet.create({
         alignItems:"center",
         
     },
-
+    err: {
+        color: '#111111',
+        paddingLeft:20,
+        paddingRight:5
+    }
 
 })

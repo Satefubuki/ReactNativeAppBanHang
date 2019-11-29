@@ -74,6 +74,8 @@ export default class Login extends Component {
                                 autoCorrect={false}
                             />
                         </View>
+                        {(this.props.emailValidation(this.state.email)|| this.state.email=='' )?<Text style={{height:0}}></Text>:
+                        <Text style={styles.err}>Email is invalid</Text>}
                         <View style={textInput}>
                             <Image style={iconInput} source={Iconpass}></Image>
                             <TextInput
@@ -85,6 +87,8 @@ export default class Login extends Component {
                                 autoCorrect={false}
                             />
                         </View>
+                        {(this.props.passwordValidation(this.state.password)|| this.state.password=='' )?<Text style={{height:0}}></Text>:
+                        <Text style={styles.err}>Password must contain at least 1 number and capital character</Text>}
                         <TouchableOpacity
                             style={button}
                             onPress = {this.onLogin.bind(this)}
@@ -247,6 +251,10 @@ const styles = StyleSheet.create({
         height: 28,
         marginRight: 10
     },
-
+    err: {
+        color: '#111111',
+        paddingLeft:20,
+        paddingRight:5
+    }
 
 })

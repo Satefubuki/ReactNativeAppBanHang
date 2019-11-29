@@ -49,7 +49,7 @@ export default class Login extends Component {
 
     render() {
         const { wapper, imageback, box1, box2,
-            text, textInput, button, icon, iconimg
+            text, textInput, button, button1, icon, iconimg
             , inactive, createAcc, iconSoci, iconInput
         } = styles;
         const { email, password }= this.state;
@@ -89,12 +89,18 @@ export default class Login extends Component {
                         </View>
                         {(this.props.passwordValidation(this.state.password)|| this.state.password=='' )?<Text style={{height:0}}></Text>:
                         <Text style={styles.err}>Password must contain at least 1 number and capital character</Text>}
-                        <TouchableOpacity
+                       
+                        {(this.props.passwordValidation(this.state.password) && this.props.emailValidation(this.state.email) )?
+                            <TouchableOpacity
                             style={button}
-                            onPress = {this.onLogin.bind(this)}
-                        >
+                            onPress = {this.onLogin.bind(this)}>
                             <Text style={styles.text1}>LOGIN</Text>
-                        </TouchableOpacity>
+                            </TouchableOpacity>:
+                            <TouchableOpacity
+                            disabled={true}
+                            style={button1}>
+                            <Text style={styles.text1}>LOGIN</Text>
+                            </TouchableOpacity>}
                     </View>
                     <View style={styles.box2}>
                         <View style={styles.box2}>
@@ -209,6 +215,16 @@ const styles = StyleSheet.create({
         alignItems: "center",
         justifyContent: 'center',
         backgroundColor: '#F035E0',
+        marginTop: 15,
+        borderRadius: 20,
+        zIndex: 100,
+        marginHorizontal: 20,
+    },
+    button1: {
+        height: 40,
+        alignItems: "center",
+        justifyContent: 'center',
+        backgroundColor: '#9C9C9C',
         marginTop: 15,
         borderRadius: 20,
         zIndex: 100,

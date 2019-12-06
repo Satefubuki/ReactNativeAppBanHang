@@ -74,7 +74,7 @@ export default class Signup extends Component {
 
     render() {
         const { wapper, imageback, box1, box2, box3,
-            text, text1, textInput, button
+            text, text1, textInput, button, button1
             , inactive, createAcc, iconInput
         } = styles;
 
@@ -141,9 +141,24 @@ export default class Signup extends Component {
                         </View>
                         {(this.checkRePass(this.state.password, this.state.repass) || this.state.repass === '') ? <Text style={{ height: 0 }} /> :
                             <Text style={styles.err}>Re-type password is not correct</Text>}
-                        <TouchableOpacity style={button} onPress={this.registerUser.bind(this)}>
+
+                         {/* <TouchableOpacity style={button} onPress={this.registerUser.bind(this)}>
                             <Text style={text1}>SIGN UP</Text>
-                        </TouchableOpacity>
+                        </TouchableOpacity> */}
+                        
+                        {(this.props.passwordValidation(this.state.password) && this.props.emailValidation(this.state.email) && 
+                        this.props.usernameValidation(this.state.username) && this.checkRePass(this.state.password, this.state.repass) )?
+                            <TouchableOpacity
+                            style={button}
+                            onPress = {this.registerUser.bind(this)}>
+                            <Text style={styles.text1}>SIGN UP</Text>
+                            </TouchableOpacity>:
+                            <TouchableOpacity
+                            disabled={true}
+                            style={button1}>
+                            <Text style={styles.text1}>SIGN UP</Text>
+                            </TouchableOpacity>}
+                        
                     </View>
                     <View style={box3}>
                         <TouchableOpacity style={createAcc} onPress={() => this.props.gotoLogin()} >
@@ -224,6 +239,16 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         backgroundColor: '#F035E0',
+        marginTop: 15,
+        borderRadius: 20,
+        zIndex: 100,
+        marginHorizontal: 20,
+    },
+    button1: {
+        height: 40,
+        alignItems: "center",
+        justifyContent: 'center',
+        backgroundColor: '#9C9C9C',
         marginTop: 15,
         borderRadius: 20,
         zIndex: 100,

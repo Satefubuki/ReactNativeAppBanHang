@@ -1,3 +1,4 @@
+/* eslint-disable quotes */
 import React, { Component } from 'react';
 import {
     View, Text, TouchableOpacity, StyleSheet
@@ -5,10 +6,10 @@ import {
 } from 'react-native';
 
 import global from '../global';
-import saveToken from '../api/saveToken';
+import saveToken from '../../api/saveToken';
 import bun from '../../assets/img/bun.jpg';
 import login1 from '../../assets/img/login1.png';
-import saveCart from '../api/saveCart';
+//import saveCart from '../api/saveCart';
 
 class Menu extends Component {
     constructor(props) {
@@ -20,32 +21,28 @@ class Menu extends Component {
         global.onLogin = this.onLogin.bind(this);
     }
 
-    onLogin(user) {
-        this.setState({ user});
-
+    onSignOut() {
+        this.setState({ user: null, });
+        saveToken('');
     }
 
-    onSignOut(){
-        this.setState({ user : null});
-        saveToken('');
+    onLogin(user) {
+        this.setState({ user, });
     }
 
     gotoAuthentication() {
         const { navigator } = this.props;
         navigator.push({ name: "Authentication" });
-
     }
 
     gotoChangeInfor() {
         const { navigator } = this.props;
-        navigator.push({ name: "ChangeInFor", user : this.state.user });
-
+        navigator.push({ name: "ChangeInFor", user: this.state.user });
     }
 
     gotoOrderHistory() {
         const { navigator } = this.props;
         navigator.push({ name: "OrderHistory" });
-
     }
  
     render() {
@@ -54,7 +51,6 @@ class Menu extends Component {
             textProfile, logincontainer } = styles;
         const { user } = this.state;
         const logoutJSX = (
-
             <View style={{ flex: 1, alignItems: "center" }}>
                 <Image style={image} source={login1} />
                 <TouchableOpacity style={button} onPress={this.gotoAuthentication.bind(this)}>
@@ -74,7 +70,7 @@ class Menu extends Component {
                         <TouchableOpacity style={btnSignInStyle} onPress={this.gotoChangeInfor.bind(this)}>
                             <Text style={textSignIn}>Change Info</Text>
                         </TouchableOpacity>
-                        <TouchableOpacity style={btnSignInStyle} onPress = {this.onSignOut.bind(this)}>
+                        <TouchableOpacity style={btnSignInStyle} onPress={this.onSignOut.bind(this)}>
                             <Text style={textSignIn}>Sign out</Text>
                         </TouchableOpacity>
                     </View>
@@ -82,8 +78,7 @@ class Menu extends Component {
                 </View>
             </View>
         );
-        
-        
+
         const mainJSX = this.state.user ? loginJSX : logoutJSX;
         return (
             <View style={container}>
@@ -96,7 +91,7 @@ class Menu extends Component {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: "#9D47AB",
+        backgroundColor: "#FE2EC8",
         borderRightWidth: 3,
         borderColor: '#fff',
         alignItems: "center",
@@ -108,11 +103,6 @@ const styles = StyleSheet.create({
         width: 100,
         height: 100,
         borderRadius: 100 / 2,
-
-
-
-
-
 
     },
     button: {
@@ -156,5 +146,7 @@ const styles = StyleSheet.create({
         justifyContent: "space-between",
         alignItems: "center",
     }
-})
+},
+);
+
 export default Menu;

@@ -1,6 +1,9 @@
+/* eslint-disable space-before-blocks */
+/* eslint-disable react/sort-comp */
+/* eslint-disable no-undef */
 import * as React from 'react';
 import {
-  View, Text, StyleSheet, Dimensions, Image, I18nManager
+  View, Text, StyleSheet, Dimensions, I18nManager
 
 } from 'react-native';
 import Animated from 'react-native-reanimated';
@@ -9,13 +12,13 @@ import {
   TabBar,
   SceneMap,
   NavigationState,
-  SceneRendererProps,
+  // SceneRendererProps,
 } from 'react-native-tab-view';
-import { Ionicons, IconBadge, Icon } from '@expo/vector-icons';
+import { Ionicons, } from '@expo/vector-icons';
 
-import initData from '../../api/initData';
-import saveCart from '../../api/saveCart';
-import getCart from '../../api/getCart';
+import initData from '../../../api/initData';
+import saveCart from '../../../api/saveCart';
+import getCart from '../../../api/getCart';
 
 import global from '../../global';
 import Home from './Home/Home';
@@ -38,9 +41,8 @@ type Route = {
 type State = NavigationState<Route>;
 
 
-export default class Shop extends React.Component<{}, State>{
-
-  constructor(props) {
+export default class Shop extends React.Component< {}, State> {
+constructor(props) {
     super(props);
     global.addProductToCart = this.addProductToCart.bind(this);
     global.incrQuantity = this.incrQuantity.bind(this);
@@ -48,8 +50,8 @@ export default class Shop extends React.Component<{}, State>{
     global.removeCart = this.removeCart.bind(this);
     global.gotoSearch = this.gotoSearch.bind(this);
 
-  }
-  // eslint-disable-next-line react/sort-comp
+}
+ 
   static title = 'Custom indicator';
   static backgroundColor = '#263238';
   static appbarElevation = 4;
@@ -62,41 +64,57 @@ export default class Shop extends React.Component<{}, State>{
     routes: [
       {
         key: 'home',
-        title: 'home',
+        title: 'Trang chủ',
         icon: 'ios-home',
         color: [0, 132, 255],
 
       },
       {
         key: 'contacts',
-        title: 'contact',
+        title: 'Liên hệ',
         icon: 'ios-people',
         color: [0, 132, 255],
       },
       {
         key: 'cart',
-        title: 'cart',
+        title: 'Giỏ hàng',
         icon: 'ios-cart',
         color: [0, 132, 255],
       },
       {
         //[76, 175, 80]
         key: 'search',
-        title: 'search',
+        title: 'Tìm kiếm',
         icon: 'ios-search',
         color: [0, 132, 255],
       },
     ],
   };
 
+  componentDidMount() {
+    initData()
+      .then(resJson => {
+        const { type, product } = resJson;
+        this.setState({
+          types: type,
+          topProducts: product
+        },
+        );
+      })
+      .catch((e) => {
+        console.log(e)
+      });
+    getCart()
+      .then(carts => this.setState({ carts }));
+  }
   addProductToCart(product) {
     // chua lm neu them 1 sp 2 lan
     this.setState({
       carts: this.state.carts.concat({ product, quantity: 1 })
     },
       () => saveCart(this.state.carts));
-
   }
+
   incrQuantity(productId) {
     const newCart = this.state.carts.map(e => {
       if (e.product.id !== productId) return e;
@@ -106,7 +124,7 @@ export default class Shop extends React.Component<{}, State>{
   }
 
   decrQuantity(productId) {
-    const newCart = this.state.carts.map(e => {
+    const newCart = this.state.carts.map(e => { 
       if (e.product.id !== productId) return e;
       return { product: e.product, quantity: e.quantity - 1 };
 
@@ -118,52 +136,33 @@ export default class Shop extends React.Component<{}, State>{
     const newCart = this.state.carts.filter(e => e.product.id !== productId);
     this.setState({ carts: newCart },
       () => saveCart(this.state.carts));
+}
 
-  }
   gotoSearch (index: number){
     this.setState({
       index,
       routes: [
         {
           key: 'search',
-          title: 'search',
+          title: 'Tìm kiếm',
           icon: 'ios-search',
           color: [0, 132, 255],
-  
         },
       ]
     });
     global.gotoSearch()
-  }
-
-  componentDidMount() {
-    initData()
-      .then(resJson => {
-        const { type, product } = resJson;
-        this.setState({
-          types: type,
-          topProducts: product
-        },
-        )
-      })
-      .catch((e) => {
-        console.log(e)
-      });
-    getCart()
-      .then(carts => this.setState({ carts }))
-  }
-
+}
 
   handleIndexChange = (index: number) =>
     this.setState({
       index,
-    });
+});
 
   renderIndicator = (
-    props: SceneRendererProps & {
-      navigationState: State;
-      getTabWidth: (i: number) => number;
-    }
+  props: SceneRendererProps & {
+    navigationState: State;
+    getTabWidth: (i: number) => number;
+  }
   ) => {
     const { position, navigationState, getTabWidth } = props;
     const inputRange = [
@@ -195,6 +194,7 @@ export default class Shop extends React.Component<{}, State>{
     });
 
     const translateX = Animated.interpolate(position, {
+      // eslint-disable-next-line object-shorthand
       inputRange: inputRange,
       outputRange: inputRange.map(x => {
         const i = Math.round(x);
@@ -231,7 +231,7 @@ export default class Shop extends React.Component<{}, State>{
   };
 
 
-  renderIcon = ({ route }: { route: Route }) => (
+  renderIcon = ({ route }: { route: Route, }) => (
     <Ionicons name={route.icon} size={20} style={styles.icon} />
 
   );
@@ -267,7 +267,7 @@ export default class Shop extends React.Component<{}, State>{
   }
 
   render() {
-    const { name, badgeCount, color, size } = this.props;
+    //const { name, badgeCount, color, size } = this.props;
     const { types, topProducts, carts } = this.state;
     return (
       <View style={styles.wapper}>
@@ -293,7 +293,6 @@ export default class Shop extends React.Component<{}, State>{
   }
 }
 
-
 const styles = StyleSheet.create({
   wapper: {
     flex: 1,
@@ -307,8 +306,10 @@ const styles = StyleSheet.create({
   },
 
   tabbar: {
-    backgroundColor: '#053057',
+    // FE2EC8
+    backgroundColor: '#FE2EC8',
     overflow: 'hidden',
+    elevation: 3,
 
   },
   icon: {
@@ -330,7 +331,7 @@ const styles = StyleSheet.create({
   badge: {
     marginTop: 4,
     marginRight: 32,
-    backgroundColor: '#f44336',
+    backgroundColor: 'red',
     height: 10,
     width: 10,
     borderRadius: 10,
@@ -343,17 +344,13 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     marginTop: -2,
   },
-  inactive: {
-    color: '#939393',
-  },
-  active: {
-    color: '#0084ff',
-  },
+
   label: {
-    fontSize: 12,
+    fontSize: 10,
     marginTop: 2,
     marginBottom: 1.5,
     backgroundColor: 'transparent',
+    color: '#FFFFFF'
   },
 });
 

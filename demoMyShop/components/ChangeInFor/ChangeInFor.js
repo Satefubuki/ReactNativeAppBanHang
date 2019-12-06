@@ -1,3 +1,4 @@
+/* eslint-disable no-shadow */
 import React, { Component } from 'react';
 import {
     View, TouchableOpacity, Text,
@@ -5,41 +6,40 @@ import {
 } from 'react-native';
 import back from '../../assets/img/backOrder.png';
 
-import changeInFoapi from '../api/changeInFo';
-import getToken from '../api/getToken';
+import changeInFoapi from '../../api/changeInFo';
+import getToken from '../../api/getToken';
 import global from '../global';
 
 export default class ChangeInfo extends Component {
     constructor(props) {
         super(props);
-        const { name, address, phone } = this. props. user;
+        const { name, address, phone } = this.props.user;
         this.state = { 
             txtName: name, 
             txtAddress: address, 
             txtPhone: phone,
         };
     }
-    alerSuccess(){
+    alerSuccess() {
         Alert.alert(
             'Notice',
             'Change InFo Successfully',
             [ 
-              {text: 'OK', onPress: this.goBackToMain.bind(this)},
+              { text: 'OK', onPress: this.goBackToMain.bind(this) },
             ],
-            {cancelable: false},
+            { cancelable: false },
           );
     }
 
-
-    change = () =>{
-        const { txtName, txtAddress, txtPhone}= this. state;
+    change() {
+        const { txtName, txtAddress, txtPhone } = this.state;
         getToken()
-        .then( token => changeInFoapi(token, txtName, txtAddress, txtPhone))
+        .then(token => changeInFoapi(token, txtName, txtAddress, txtPhone))
         .then(user => {
             this.alerSuccess();
             global.onLogin(user);
-        
-        })
+        }
+        )
         .catch(e => console.log(e));
     }
 
@@ -97,7 +97,7 @@ export default class ChangeInfo extends Component {
 const styles = StyleSheet.create({
     wrapper: { flex: 1, backgroundColor: '#fff' },
     header: { flex: 1, backgroundColor: '#9D47AB', alignItems: 'center', justifyContent: 'space-between', flexDirection: 'row', paddingHorizontal: 10 },// eslint-disable-line
-    headerTitle: {  color: '#fff', fontSize: 20 },
+    headerTitle: { color: '#fff', fontSize: 20 },
     backIconStyle: { width: 30, height: 30 },
     body: { flex: 10, backgroundColor: '#F6F6F6', justifyContent: 'center' },
     textInput: {
@@ -114,7 +114,8 @@ const styles = StyleSheet.create({
     signInTextStyle: {
         color: '#FFF',
         // fontFamily: 'Avenir',
-        fontWeight: '600', paddingHorizontal: 20
+        fontWeight: '600', 
+        paddingHorizontal: 20
     },
     signInContainer: {
         marginHorizontal: 20,
@@ -130,5 +131,3 @@ const styles = StyleSheet.create({
         marginTop: 50
     }
 });
-
-

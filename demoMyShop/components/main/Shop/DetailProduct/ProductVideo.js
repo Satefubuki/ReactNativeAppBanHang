@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
 import { 
-    Alert, Text, StyleSheet, Image, Dimensions, ScrollView, TouchableOpacity, StatusBar
+    StyleSheet, ScrollView, TouchableOpacity, StatusBar
 } from 'react-native';
-import VideoDetail from './VideoDetail';
-import data from './data.json';
-import VideoPlayer from './VideoPlayer'
 import { createAppContainer } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
 import { View } from 'react-native-animatable';
 
+import VideoDetail from './VideoDetail';
+import data from './data.json';
+import VideoPlayer from './VideoPlayer';
 
 // const VideosData = [
 //   {
@@ -80,12 +80,9 @@ import { View } from 'react-native-animatable';
 // ];
 
 class ProductVideo extends Component {
-      constructor(props){
-        super(props);
-        this.state= {
-           
-        }
-    }
+  constructor(props){
+    super(props);
+  }
     // static navigationOptions = ({ navigation }) => {
     //   return {
     //     title: 'Header Title',
@@ -97,11 +94,11 @@ class ProductVideo extends Component {
     //     )
     //   }
     // };
-    static navigationOptions= {
+    // eslint-disable-next-line no-undef
+    static navigationOptions = {
      // header: null,
-     headerTransparent:true
+     headerTransparent: true
      //headerStyle:{ position: 'absolute', backgroundColor: 'transparent', zIndex: 100, top: 0, left: 0, right: 0 }
-
     }
     gotoDetail(player) {
       const { navigator } = this.props;
@@ -110,22 +107,23 @@ class ProductVideo extends Component {
       render() {
         const { navigation } = this.props;
         return (
-          <View style={{ flex: 1, backgroundColor: '#121212' }} animation="fadeInUpBig" delay={1500} useNativeDriver>
-        
+          <View style={{ flex: 1, backgroundColor: '#121212' }} animation="fadeInUpBig" delay={1500} useNativeDriver>     
           <StatusBar backgroundColor="blue" barStyle="light-content" />
           <ScrollView
             style={{ flex: 1, backgroundColor: 'white' }}
-            contentContainerStyle={{ paddingTop: 0, }}>
+            contentContainerStyle={{ paddingTop: 0, }}
+          >
             <View
               style={{ alignItems: 'center', marginTop: 10, marginBottom: 20 }}>
               {
                 data.map((_data, i) => {
                   return (
                     <View key={i} style={{ flex: 1 }}>
-                      <TouchableOpacity onPress = {() =>this.props.navigation.navigate('VideoPlayer', {uri: _data.videoInfo.link, title: _data.videoInfo.title, channel: _data.channelInfo.channelName, description: _data.videoInfo.description, logo: _data.channelInfo.channelAvatarImage})}>
+                      <TouchableOpacity onPress={() => this.props.navigation.navigate('VideoPlayer', {uri: _data.videoInfo.link, title: _data.videoInfo.title, channel: _data.channelInfo.channelName, description: _data.videoInfo.description, logo: _data.channelInfo.channelAvatarImage })}>
                       <VideoDetail
                         videoInfo={_data.videoInfo}
-                        channelInfo={_data.channelInfo} />
+                        channelInfo={_data.channelInfo} 
+                      />
                       </TouchableOpacity>
                     </View>
                     
@@ -140,20 +138,21 @@ class ProductVideo extends Component {
 }
 const RootStack = createStackNavigator(
   {
-    ProductVideo:{screen: ProductVideo } ,
-    VideoPlayer: {screen: VideoPlayer }
+    ProductVideo: { screen: ProductVideo },
+    VideoPlayer: { screen: VideoPlayer }
     
-  }
+  },
   // ,{
   //   defaultNavigationOptions: {
   //      //header: null,
   //   }}
-    ,{
+    {
     initialRouteName: 'ProductVideo',
   },
   );
  
 const AppContainer = createAppContainer(RootStack);
+// eslint-disable-next-line react/no-multi-comp
 export default class AppVideo extends React.Component {
   render() {
     return <AppContainer />;

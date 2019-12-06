@@ -1,50 +1,47 @@
 import React, { Component } from 'react';
 import {
     View, Text, StyleSheet, TextInput, Image, ImageBackground,
-    TouchableOpacity, Icon
+    TouchableOpacity,
 } from 'react-native';
 
 
-import loGin from '../api/login';
+import loGin from '../../api/login';
 import global from '../global';
 
-import saveToken from '../api/saveToken';
+import saveToken from '../../api/saveToken';
 // import getToken from '../api/getToken';
 
-import background from '../../assets/img/wallpaper.png'
-import dog from '../../assets/img/dog.png'
+import background from '../../assets/img/wallpaper.png';
+import dog from '../../assets/img/dog.png';
 import IconUser from '../../assets/img/username.png';
 import Iconpass from '../../assets/img/password.png';
 import Iconfb from '../../assets/img/iconfb.png';
 import Icontt from '../../assets/img/icontt.png';
 import Icongg from '../../assets/img/google.png';
-import iconBack from '../../assets/img/iconBack.png'
-
+import iconBack from '../../assets/img/iconBack.png';
 
 export default class Login extends Component {
     constructor(props) {
         super(props);
+        const { user = null } = this.props;
+        const roleId = user ? user.roleId : '';
         this.state = {
-            email: "",
-            password: "",
+            email: '',
+            password: '',
+            roleId,
             // kq: "Chưa login",
-        }
-    }
-    //test thu
-// componentDidMount(){
-//     getToken()
-//     .then(res=> console.log('Token::::'+res))
-// }
+        };
+    } 
 
-    onLogin (){
-        const { email, password } = this.state;
-        loGin(email, password)
-            .then( res => {
-                global.onLogin(res.user);
+    onLogin() {
+        const { email, password, roleId } = this.state;
+        loGin(email, password, roleId)
+            .then(res => {
+                global.onLogin(res.user.roleId === 1);
                 this.props.goBacktoMain();
                 saveToken(res.token);
             })
-            .catch( e => console.log(e));
+            .catch(e => console.log(e));
     }
 
     render() {
@@ -52,7 +49,7 @@ export default class Login extends Component {
             text, textInput, button, button1, icon, iconimg
             , inactive, createAcc, iconSoci, iconInput
         } = styles;
-        const { email, password }= this.state;
+        //const { email, password }= this.state;
 
         return (
             <View style={wapper}>
@@ -65,21 +62,23 @@ export default class Login extends Component {
                     </View>
                     <View style={box1}>
                         <View style={textInput}>
-                            <Image style={iconInput} source={IconUser}></Image>
+                            <Image style={iconInput} source={IconUser} />
                             <TextInput
-                                onChangeText={text => this.setState({ email : text})}
+                                // eslint-disable-next-line no-shadow
+                                onChangeText={text => this.setState({ email: text })}
                                 value={this.state.email}
                                 placeholder="Enter your email"
                                 placeholderTextColor="white"
                                 autoCorrect={false}
                             />
                         </View>
-                        {(this.props.emailValidation(this.state.email)|| this.state.email=='' )?<Text style={{height:0}}></Text>:
+                        {(this.props.emailValidation(this.state.email) || this.state.email === '') ? <Text style={{ height: 0, }} /> :
                         <Text style={styles.err}>Email is invalid</Text>}
                         <View style={textInput}>
-                            <Image style={iconInput} source={Iconpass}></Image>
+                            <Image style={iconInput} source={Iconpass} />
                             <TextInput
-                                onChangeText={text => this.setState({ password : text })}
+                            // eslint-disable-next-line no-shadow
+                                onChangeText={text => this.setState({ password: text })}
                                 value={this.state.password}
                                 secureTextEntry
                                 placeholder="Enter your Password"
@@ -87,18 +86,21 @@ export default class Login extends Component {
                                 autoCorrect={false}
                             />
                         </View>
-                        {(this.props.passwordValidation(this.state.password)|| this.state.password=='' )?<Text style={{height:0}}></Text>:
+                        {(this.props.passwordValidation(this.state.password) || this.state.password === '') ? <Text style={{ height: 0, }} /> :
                         <Text style={styles.err}>Password must contain at least 1 number and capital character</Text>}
                        
-                        {(this.props.passwordValidation(this.state.password) && this.props.emailValidation(this.state.email) )?
+                        {(this.props.passwordValidation(this.state.password) && this.props.emailValidation(this.state.email)) ?
                             <TouchableOpacity
                             style={button}
-                            onPress = {this.onLogin.bind(this)}>
+                            onPress={this.onLogin.bind(this)}
+                            >
                             <Text style={styles.text1}>LOGIN</Text>
-                            </TouchableOpacity>:
+                            </TouchableOpacity> :
                             <TouchableOpacity
+                            // eslint-disable-next-line react/jsx-boolean-value
                             disabled={true}
-                            style={button1}>
+                            style={button1} 
+                            >
                             <Text style={styles.text1}>LOGIN</Text>
                             </TouchableOpacity>}
                     </View>
@@ -130,10 +132,13 @@ export default class Login extends Component {
                         </View>
                         <TouchableOpacity
                             style={{
-                                marginBottom: 15, flexDirection: "row",
-                                justifyContent: "center", alignItems: "center"
+                                marginBottom: 15, 
+                                flexDirection: 'row',
+                                justifyContent: 'center', 
+                                alignItems: 'center'
                             }}
-                            onPress={() => this.props.goBacktoMain()}>
+                            onPress={() => this.props.goBacktoMain()} 
+                        >
                             <Image style={{ width: 20, height: 20 }} source={iconBack} />
                             <Text style={{ color: '#BDBDBD', fontSize: 15 }}>Back</Text>
                         </TouchableOpacity>
@@ -141,39 +146,31 @@ export default class Login extends Component {
 
                 </ImageBackground>
             </View>
-        )
+        );
     }
-
 }
+
 const styles = StyleSheet.create({
     wapper: {
         flex: 1,
-
     },
     box1: {
-
         flex: 2,
     },
-
     box2: {
         flex: 2,
-        alignItems: "center",
-        justifyContent: "center",
-
-
+        alignItems: 'center',
+        justifyContent: 'center',
     },
     box3: {
         flex: 1,
-        flexDirection: "row",
+        flexDirection: 'row',
         padding: 15,
         marginBottom: 0,
-        justifyContent: "center",
-
-
+        justifyContent: 'center',
     },
 
     text: {
-
         fontSize: 30,
         color: 'white',
     },
@@ -182,11 +179,9 @@ const styles = StyleSheet.create({
         color: 'white',
         backgroundColor: 'transparent',
         marginTop: 18,
-        textAlign: "center",
+        textAlign: 'center',
         height: 40,
         fontWeight: '400',
-
-        color: '#ffffff',
     },
 
     inactive: {
@@ -199,9 +194,9 @@ const styles = StyleSheet.create({
         padding: 10,
     },
     textInput: {
-        flexDirection: "row",
+        flexDirection: 'row',
         // justifyContent:"center",
-        alignItems: "center",
+        alignItems: 'center',
         backgroundColor: 'rgba(255, 255, 255, 0.4)',
         marginTop: 15,
         height: 40,
@@ -212,7 +207,7 @@ const styles = StyleSheet.create({
     },
     button: {
         height: 40,
-        alignItems: "center",
+        alignItems: 'center',
         justifyContent: 'center',
         backgroundColor: '#F035E0',
         marginTop: 15,
@@ -222,7 +217,7 @@ const styles = StyleSheet.create({
     },
     button1: {
         height: 40,
-        alignItems: "center",
+        alignItems: 'center',
         justifyContent: 'center',
         backgroundColor: '#9C9C9C',
         marginTop: 15,
@@ -238,12 +233,11 @@ const styles = StyleSheet.create({
     },
     icon: {
         flex: 1,
-        alignItems: "center",
-        flexDirection: "row",
-        justifyContent: "center",
+        alignItems: 'center',
+        flexDirection: 'row',
+        justifyContent: 'center',
         paddingLeft: 60,
         paddingRight: 60
-
     },
 
     iconimg: {
@@ -252,14 +246,14 @@ const styles = StyleSheet.create({
     },
     createAcc: {
         flex: 1,
-        alignItems: "center",
+        alignItems: 'center',
         paddingVertical: 22,
 
 
     },
     iconSoci: {
         flex: 1,
-        alignItems: "center",
+        alignItems: 'center',
 
     },
     iconInput: {
@@ -269,8 +263,7 @@ const styles = StyleSheet.create({
     },
     err: {
         color: '#111111',
-        paddingLeft:20,
-        paddingRight:5
-    }
-
+        paddingLeft: 20,
+        paddingRight: 5
+    },
 })

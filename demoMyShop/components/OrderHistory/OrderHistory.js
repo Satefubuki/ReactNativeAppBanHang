@@ -1,11 +1,12 @@
-import React, { Component,  } from 'react';
+/* eslint-disable quotes */
+import React, { Component, } from 'react';
 import {
     View, Text, TouchableOpacity,
     StyleSheet, Dimensions, Image, ScrollView
 } from 'react-native';
 import back from '../../assets/img/backOrder.png';
 
-const { width,height } = Dimensions.get('window');
+const { width, height } = Dimensions.get('window');
 
 
 export default class OrderHistory extends Component {
@@ -16,13 +17,13 @@ export default class OrderHistory extends Component {
     render() {
         const { container, wapper, header,
              imgHeader, txtHeader, styleContainer,
-             title,txtInfo } = styples;
+             title, txtInfo } = styples;
         return (
             <View style={container}>
                 <View style={header}>
                         <View style={{ with: 30 }} />
                         <Text style={txtHeader}>Order History</Text>
-                        <TouchableOpacity onPress={ this.goBacktoMain.bind(this)} >
+                        <TouchableOpacity onPress={this.goBacktoMain.bind(this)} >
                             <Image style={imgHeader} source={back} />
                         </TouchableOpacity>
                 </View>
@@ -96,7 +97,7 @@ export default class OrderHistory extends Component {
     }
 }
 const styples = StyleSheet.create({
-    container:{
+    container: {
         flex: 1,
         
     },
@@ -105,13 +106,13 @@ const styples = StyleSheet.create({
         width: width - 20,
         backgroundColor: 'white',
         elevation: 5,
-        padding:10,
-        margin:10,
-        paddingTop:0,
+        padding: 10,
+        margin: 10,
+        paddingTop: 0,
     },
     header: {
         height: height / 10,
-        backgroundColor: '#9D47AB',
+        backgroundColor: '#FE2EC8',
         alignItems: "center",
         justifyContent: "space-between",
         flexDirection: "row",
@@ -137,15 +138,15 @@ const styples = StyleSheet.create({
         
 
     },
-    title:{
-        flex:1,
+    title: {
+        flex: 1,
         justifyContent: "space-between",
         
 
     },
-    txtInfo:{
-        color:'#AFAFAF',
-        fontSize:15,
+    txtInfo: {
+        color: '#AFAFAF',
+        fontSize: 15,
     },
 
 })

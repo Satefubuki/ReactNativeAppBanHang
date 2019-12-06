@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, TouchableOpacity, ScrollView, View, Image, Dimensions } from 'react-native';
+import { StyleSheet, Text, TouchableOpacity,
+     ScrollView, View, Image, Dimensions } from 'react-native';
 
 import serum from '../../../../assets/sp/serum.jpg';
 import stdau from '../../../../assets/sp/stdau.jpg';

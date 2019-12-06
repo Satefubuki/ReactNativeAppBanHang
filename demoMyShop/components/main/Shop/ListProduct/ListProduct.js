@@ -1,3 +1,5 @@
+/* eslint-disable quotes */
+/* eslint-disable no-undef */
 import React, { Component } from 'react';
 import {
     View, Text, TouchableOpacity,
@@ -5,10 +7,10 @@ import {
     FlatList, Image, ActivityIndicator
 } from 'react-native';
 import backList from '../../../../assets/img/backList.png';
-import getListProductPage from '../../../api/getListProductPage';
+import getListProductPage from '../../../../api/getListProductPage';
 
 const { height } = Dimensions.get('window');
-const url = 'http://192.168.1.11/app/images/product/';
+const url = 'http://192.168.1.3/app/images/product/';
 
 export default class ListProduct extends Component {
     constructor(props) {
@@ -17,51 +19,12 @@ export default class ListProduct extends Component {
             loading: false,
             refreshing: false,
             listProduct: [],
-            page: 1,
-           
-        }
-        this.arr = [];
-
-    }
-
-    goBack() {
-        const { navigator } = this.props;
-        navigator.pop();
-    }
-    goToDetail = (product) => {
-        const { navigator } = this.props;
-        navigator.push({ name: 'PRODUCT_DETAIL', product })
-    }
-
-    renderSeparator = () => {
-        return (
-            <View
-                style={{
-                    height: 1,
-                    width: "86%",
-                    backgroundColor: "#CED0CE",
-                    marginLeft: "14%"
-                }}
-            />
-        );
-    };
-
-    renderFooter = () => {
-        if (!this.state.refreshing) return null;
-        return (
-            <View
-              style={{
-                paddingVertical: 20,
-                borderTopWidth: 1,
-                borderColor: "#CED0CE"
-              }}
-            >
-              <ActivityIndicator animating size="large" />
-            </View>
-          );
+            page: 1, 
         };
+        this.arr = [];
+    }
 
-    componentDidMount = ()=> {
+    componentDidMount() {
         const idType = this.props.category.id;
         getListProductPage(idType, 1)
             .then(arrProduct => {
@@ -75,8 +38,16 @@ export default class ListProduct extends Component {
             })
             .catch(e => console.log(e) )
     }
-    
-    handleRefresh = () => {
+    goBack() {
+        const { navigator } = this.props;
+        navigator.pop();
+    }
+    goToDetail(product) {
+        const { navigator } = this.props;
+        navigator.push({ name: 'PRODUCT_DETAIL', product })
+    }
+
+    handleRefresh() {
         this.setState({
             refreshing: true,
             // page: this.state.page + 1,
@@ -100,8 +71,35 @@ export default class ListProduct extends Component {
             })
             .catch(e => console.log(e))
     }
-    
-       render() {
+    renderSeparator() {
+        return (
+            <View
+                style={{
+                    height: 1,
+                    width: '86%',
+                    backgroundColor: '#CED0CE',
+                    marginLeft: '14%'
+                }}
+            />
+        );
+    }
+
+    renderFooter = () => {
+        if (!this.state.refreshing) return null;
+        return (
+            <View
+              style={{
+                paddingVertical: 20,
+                borderTopWidth: 1,
+                borderColor: '#CED0CE'
+              }}
+            >
+              <ActivityIndicator animating size="large" />
+            </View>
+          );
+        };
+
+render() {
         const { listProduct } = this.state;
         const { category } = this.props;
         const { container, wapper, header, backStyle, titleStyle,
@@ -124,7 +122,7 @@ export default class ListProduct extends Component {
                         data={listProduct}
                         renderItem={({ item }) => (
                             <View style={proContainer}>
-                                <Image source={{ uri: `${url}${item.images[0]}`}} style={proImg} />
+                                <Image source={{ uri: `${url}${item.images[0]}` }} style={proImg} />
                                 <View style={productInfo}>
                                     <Text style={txtName}>{item.name}</Text>
                                     <Text style={txtPrice}>{item.price}</Text>
@@ -132,7 +130,7 @@ export default class ListProduct extends Component {
                                     <View style={lastRowInfo}>
                                         <Text style={txtColor}>{item.color}</Text>
                                         <View style={{ backgroundColor: item.color.toLowerCase(), height: 16, width: 16, borderRadius: 8 }} />
-                                        <TouchableOpacity onPress={ () => {this.goToDetail(item)} }>
+                                        <TouchableOpacity onPress={() => { this.goToDetail(item) }}>
                                             <Text style={txtShowDetail}>Show Detail</Text>
                                         </TouchableOpacity>
                                     </View>
@@ -145,7 +143,7 @@ export default class ListProduct extends Component {
                         onRefresh={this.handleRefresh.bind(this)}
                         keyExtractor={(item, index)=> index.toString()}
                         ListFooterComponent={this.renderFooter}
-                 />
+                    />
                 </View>
             </View>
 
@@ -157,7 +155,7 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: 'white',
         padding: 10,
-        paddingBottom:10
+        paddingBottom: 10
 
     },
     wapper: {
@@ -168,16 +166,17 @@ const styles = StyleSheet.create({
     header: {
         height: height / 12,
         padding: 5,
-        flexDirection: "row",
-        justifyContent: "space-between",
-        alignItems: "center"
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center'
 
-    }, backStyle: {
+    },
+    backStyle: {
         width: 40,
         height: 40,
     },
     proContainer: {
-        flexDirection: "row",
+        flexDirection: 'row',
         paddingVertical: 15,
         borderTopColor: '#F0F0F0',
         borderTopWidth: 1,
@@ -224,19 +223,4 @@ const styles = StyleSheet.create({
     },
 
 
-})
-{/* <View style={proContainer}>
-                        <Image source={cnang} style={proImg} />
-                        <View style={productInfo}>
-                            <Text style={txtName}>Body Lotion Ha+</Text>
-                            <Text style={txtPrice}>450.000</Text>
-                            <Text style={txtMaterial}>Material</Text>
-                            <View style={lastRowInfo}>
-                                <Text style={txtColor}>Color RoyalBlue</Text>
-                                <View style={{ backgroundColor: 'cyan', height: 16, width: 16, borderRadius: 8 }} />
-                                <TouchableOpacity>
-                                    <Text style={txtShowDetail}>Show Detail</Text>
-                                </TouchableOpacity>
-                            </View>
-                        </View>
-                    </View> */}
+});

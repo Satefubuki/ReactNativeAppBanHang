@@ -1,35 +1,43 @@
 import React, { Component } from 'react';
 import { 
-    View, Text, StyleSheet, Image, Dimensions, ScrollView, TouchableOpacity , ImageBackground, StatusBar
+    View, Text, Dimensions, ImageBackground, 
 } from 'react-native';
-import Icon from 'react-native-vector-icons/MaterialIcons';
 import Menu, { MenuItem } from 'react-native-material-menu';
-const SCREEN_WIDTH = Dimensions.get('window').width
-const SCREEN_HEIGHT = Dimensions.get('window').height
+import Icon from 'react-native-vector-icons/MaterialIcons';
+
+const SCREEN_WIDTH = Dimensions.get('window').width;
+const SCREEN_HEIGHT = Dimensions.get('window').height;
 
 const MenuItems = [
-    "See fewer videos like this",
-    "Block this chaneel",
-    "Save to Watch later",
-    "Save to playlist",
-    "Share",
-    "Report"
+    'See fewer videos like this',
+    'Block this chaneel',
+    'Save to Watch later',
+    'Save to playlist',
+    'Share',
+    'Report'
   ];
 
-class VideoThumbnail extends React.Component {
+class VideoThumbnail extends Component {
     render() {
       return (
-        <View style={{ flex: 1,width: SCREEN_WIDTH/2, height: SCREEN_HEIGHT/5, paddingBottom:5}}>
-          <View style={{ flex: 1, width: null, height: SCREEN_HEIGHT/5 }}>
+        <View style={{ flex: 1, width: SCREEN_WIDTH / 2, height: SCREEN_HEIGHT / 5, paddingBottom: 5 }}>
+          <View style={{ flex: 1, width: null, height: SCREEN_HEIGHT / 5 }}>
             <ImageBackground
-              style={{  width: SCREEN_WIDTH/2, height: SCREEN_HEIGHT/5, borderRadius: 8 }}
+              style={{ width: SCREEN_WIDTH / 2, height: SCREEN_HEIGHT / 5, borderRadius: 8 }}
               imageStyle={{ borderRadius: 8 }}
               source={{ uri: this.props.thumbnailUrl }}
             />
             <VideoLength
               style={{
-                position: "absolute", right: 15, top: -30, backgroundColor: "#9D47AB", color: "white",
-                borderRadius: 3, paddingHorizontal: 7, textAlign: "right", overflow: "hidden",
+                position: 'absolute', 
+                right: 15, 
+                top: -30, 
+                backgroundColor: '#9D47AB', 
+                color: 'white',
+                borderRadius: 3, 
+                paddingHorizontal: 7, 
+                textAlign: 'right', 
+                overflow: 'hidden',
               }}
               videoLength={this.props.videoLength} />
           </View>
@@ -38,35 +46,37 @@ class VideoThumbnail extends React.Component {
     }
   }
   
-class VideoLength extends React.Component {
+// eslint-disable-next-line react/no-multi-comp
+class VideoLength extends Component {
     render() {
       return (
         <View>
           <Text style={this.props.style}>{this.props.videoLength}</Text>
         </View>
-      )
+        )
     }
   }
   
+// eslint-disable-next-line react/no-multi-comp
 class VideoInfo extends React.Component {
     render() {
       return (
-        <View style={{ paddingBottom: 5, flexDirection: 'row', height: SCREEN_HEIGHT/5 - 20 }}>
+        <View style={{ paddingBottom: 5, flexDirection: 'row', height: (SCREEN_HEIGHT / 5) - 20 }}>
           <View style={{ paddingHorizontal: 5, paddingBottom: 5 }}>
             <Text style={{fontWeight: 'bold', fontSize: 14, color: '#121212', flexWrap: 'wrap' }}>
               {this.props.videoTitle}
             </Text>
-            <Text style={{fontWeight: 'normal',  fontSize: 14, marginTop: 1, color: '#A7A7A7', height: 20 }}>
+            <Text style={{fontWeight: 'normal', fontSize: 14, marginTop: 1, color: '#A7A7A7', height: 20 }}>
               {
                 this.props.channelName
               }
             </Text>
-            <Text style={{fontWeight: 'normal',  fontSize: 14, marginTop: 1, color: '#A7A7A7', height: 20 }}>
+            <Text style={{fontWeight: 'normal', fontSize: 14, marginTop: 1, color: '#A7A7A7', height: 20 }}>
               {
                 this.props.videoInfo.upload
               }
             </Text>
-            <Text style={{fontWeight: 'normal',  fontSize: 14, marginTop: 1, color: '#A7A7A7', height: 40 }}>{
+            <Text style={{fontWeight: 'normal', fontSize: 14, marginTop: 1, color: '#A7A7A7', height: 40 }}>{
                 this.props.videoInfo.description
               }</Text>
           </View>
@@ -75,7 +85,8 @@ class VideoInfo extends React.Component {
     }
   }
   
-class VideoOptions extends React.Component {
+// eslint-disable-next-line react/no-multi-comp
+class VideoOptions extends Component {
     _menu = null;
   
     setMenuRef = ref => {
@@ -103,24 +114,27 @@ class VideoOptions extends React.Component {
                 return (
                   <MenuItem
                     onPress={this.hideMenu}
-                    style={{ backgroundColor: "#121212" }}
-                    textStyle={{ color: "#fff" }}
-                    underlayColor={"#121212"}
-                    key={i}>{data}</MenuItem>
+                    style={{ backgroundColor: '#121212' }}
+                    textStyle={{ color: '#fff' }}
+                    underlayColor={'#121212'}
+                    key={i} 
+                  >
+                    {data}</MenuItem>
                 );
               })
             }
           </Menu>
         </View>
-      )
+      );
     }
   }
   
-export default class VideoDetail extends React.Component {
+// eslint-disable-next-line react/no-multi-comp
+export default class VideoDetail extends Component {
     render() {
       return (
         <View style = {{flexDirection: 'row', width: SCREEN_WIDTH, paddingBottom: 10}}>
-          <View style={{width: SCREEN_WIDTH/2, paddingLeft: 5}}>
+          <View style={{width: SCREEN_WIDTH / 2, paddingLeft: 5 }}>
           <VideoThumbnail
             thumbnailUrl={this.props.videoInfo.videoThumbnailUrl}
             videoLength={this.props.videoInfo.videoLength}

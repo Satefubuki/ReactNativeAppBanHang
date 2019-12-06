@@ -1,5 +1,5 @@
-const changeInFo =(token, name, address, phone )=>(
-    fetch("http://192.168.1.9/app/change_info.php",
+const changeInFo = (token, name, address, phone )=>(
+    fetch("http://192.168.1.3/app/change_info.php",
     {
         method : "POST",
         headers : {

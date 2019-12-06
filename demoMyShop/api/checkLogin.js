@@ -1,14 +1,14 @@
-const login =(email, password)=>(
-    fetch("http://192.168.1.9/app/login.php",
+const checkLogin =(token)=>(
+    fetch("http://192.168.1.3/app/check_login.php",
     {
         method : "POST",
         headers : {
                 'Content-Type': 'application/json',
                 Accept: 'application/json'
         }, 
-        body : JSON.stringify({ email, password}),
+        body : JSON.stringify({ token}),
     })
     .then(res => res.json())
     
 );
-module.exports = login;
+module.exports = checkLogin;

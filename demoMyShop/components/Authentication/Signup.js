@@ -4,10 +4,10 @@ import {
     TouchableOpacity, Alert
 } from 'react-native';
 
-import register from '../api/register';
+import register from '../../api/register';
 
-import background from '../../assets/img/wallpaper.png'
-import dog from '../../assets/img/dog.png'
+import background from '../../assets/img/wallpaper.png';
+import dog from '../../assets/img/dog.png';
 import IconUser from '../../assets/img/username.png';
 import Iconpass from '../../assets/img/password.png';
 import email from '../../assets/img/email.png';
@@ -16,63 +16,66 @@ export default class Signup extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            username: "",
-            password: "",
-            email:"",
-            repass:"",
-            
-        }
+            username: '',
+            password: '',
+            email: '',
+            repass: '',
+
+        };
     }
-    goBacktoLogin() {
-        const { navigator } = this.props;
-        navigator.pop();
-    }
-   
-    
+
     onSuccess() {
         Alert.alert(
             'Notice',
             'Sign Up Successfully',
-            [ 
-              {text: 'OK', onPress: this.props.gotoLogin()},
+            [
+                { text: 'OK', onPress: this.props.gotoLogin() },
             ],
-            {cancelable: false},
-          );
+            { cancelable: false },
+        );
     }
 
-    onFail(){
+    onFail() {
         Alert.alert(
             'Notice',
             'Email is used by user orther!!!',
             [
-              {text: 'OK', onPress: this.resetEmail.bind(this)},
+                { text: 'OK', onPress: this.resetEmail.bind(this) },
             ],
-            {cancelable: false},
-          );
-    }
-    resetEmail(){
-        this.setState({ email : ''})
-    }
-    registerUser () {
-        const { email, username, password} = this.state;
-        register( email, username, password)
-        .then( res => {
-            if(res === 'THANH_CONG') return this.onSuccess();
-            return this.onFail();
-        })
-        // .catch(err => console.log(err));
+            { cancelable: false },
+        );
     }
 
-    checkRePass=(p, r)=>{
-        if(p ===r)
-            return true;
+    goBacktoLogin() {
+        const { navigator } = this.props;
+        navigator.pop();
+    }
+
+    resetEmail() {
+        this.setState({ email: '' });
+    }
+
+    registerUser() {
+        // eslint-disable-next-line no-shadow
+        const { email, username, password } = this.state;
+        register(email, username, password)
+            .then(res => {
+                if (res === 'THANH_CONG') return this.onSuccess();
+                return this.onFail();
+            })
+            .catch(err => console.log(err));
+    }
+
+    // eslint-disable-next-line no-undef
+    checkRePass = (p, r) => {
+        if (p === r) return true;
         return false;
     }
 
     render() {
-        const { wapper, imageback, box1, box2,box3,
-            text, text1, textInput, button, icon, iconimg
-            , inactive, createAcc,iconInput
+        const { wapper, imageback, box1, box2, box3,
+            text, text1, textInput, button
+            , inactive, createAcc, iconInput
         } = styles;
 
         return (
@@ -86,31 +89,33 @@ export default class Signup extends Component {
                     </View>
                     <View style={box1}>
                         <View style={textInput}>
-                            <Image style={iconInput} source={IconUser}></Image>
+                            <Image style={iconInput} source={IconUser} />
                             <TextInput
-                                onChangeText={text => this.setState({ username : text })}
+                                // eslint-disable-next-line no-shadow
+                                onChangeText={text => this.setState({ username: text })}
                                 value={this.state.username}
                                 placeholder="Enter your username"
                                 placeholderTextColor="white"
                                 autoCorrect={false}
                             />
                         </View>
-                        {(this.props.usernameValidation(this.state.username)|| this.state.username=='' )?<Text style={{height:0}}></Text>:
-                        <Text style={styles.err}>Username is invalid</Text>}
+                        {(this.props.usernameValidation(this.state.username) || this.state.username === '') ? <Text style={{ height: 0 }} /> :
+                            <Text style={styles.err}>Username is invalid</Text>}
                         <View style={textInput}>
-                            <Image style={iconInput} source={email}></Image>
+                            <Image style={iconInput} source={email} />
                             <TextInput
-                                onChangeText={text => this.setState({ email : text })}
+                                // eslint-disable-next-line no-shadow
+                                onChangeText={text => this.setState({ email: text })}
                                 value={this.state.email}
                                 placeholder="Enter your email"
                                 placeholderTextColor="white"
                                 autoCorrect={false}
                             />
                         </View>
-                        {(this.props.emailValidation(this.state.email)|| this.state.email=='' )?<Text style={{height:0}}></Text>:
-                        <Text style={styles.err}>Email is invalid</Text>}
+                        {(this.props.emailValidation(this.state.email) || this.state.email === '') ? <Text style={{ height: 0 }} /> :
+                            <Text style={styles.err}>Email is invalid</Text>}
                         <View style={textInput}>
-                            <Image style={iconInput} source={Iconpass}></Image>
+                            <Image style={iconInput} source={Iconpass} />
                             <TextInput
                                 onChangeText={text => this.setState({ password: text })}
                                 value={this.state.password}
@@ -120,10 +125,10 @@ export default class Signup extends Component {
                                 autoCorrect={false}
                             />
                         </View>
-                        {(this.props.passwordValidation(this.state.password)|| this.state.password=='' )?<Text style={{height:0}}></Text>:
-                        <Text style={styles.err}>Password must contain at least 1 number and capital character</Text>}
+                        {(this.props.passwordValidation(this.state.password) || this.state.password === '') ? <Text style={{ height: 0 }} /> :
+                            <Text style={styles.err}>Password must contain at least 1 number and capital character</Text>}
                         <View style={textInput}>
-                            <Image style={iconInput} source={Iconpass}></Image>
+                            <Image style={iconInput} source={Iconpass} />
                             <TextInput
                                 onChangeText={repass => this.setState({ repass })}
                                 value={this.state.repass}
@@ -131,56 +136,48 @@ export default class Signup extends Component {
                                 placeholder="Re-enter your Password"
                                 placeholderTextColor="white"
                                 autoCorrect={false}
-                                
+
                             />
                         </View>
-                        {(this.checkRePass(this.state.password, this.state.repass)|| this.state.repass=='' )?<Text style={{height:0}}></Text>:
-                        <Text style={styles.err}>Re-type password is not correct</Text>}
+                        {(this.checkRePass(this.state.password, this.state.repass) || this.state.repass === '') ? <Text style={{ height: 0 }} /> :
+                            <Text style={styles.err}>Re-type password is not correct</Text>}
                         <TouchableOpacity style={button} onPress={this.registerUser.bind(this)}>
                             <Text style={text1}>SIGN UP</Text>
                         </TouchableOpacity>
                     </View>
-                        <View style={box3}>
-                            <TouchableOpacity style={createAcc} onPress={()=>this.props.gotoLogin()} >
-                                <Text style={inactive}>Login</Text>
-                            </TouchableOpacity>
-                            
-                            
-                        </View>
+                    <View style={box3}>
+                        <TouchableOpacity style={createAcc} onPress={() => this.props.gotoLogin()} >
+                            <Text style={inactive}>Login</Text>
+                        </TouchableOpacity>
+                    </View>
                     {/* </View> */}
-
                 </ImageBackground>
-           </View>
-        )
+            </View>
+        );
     }
-
 }
+
 const styles = StyleSheet.create({
     wapper: {
         flex: 1,
 
     },
     box1: {
-     flex: 3,
+        flex: 3,
     },
     box2: {
         flex: 2,
-        alignItems: "center",
-        justifyContent: "center",
-
-
+        alignItems: 'center',
+        justifyContent: 'center',
     },
     box3: {
-        // backgroundColor:'pink',
         flex: 1,
-        flexDirection: "row",
+        flexDirection: 'row',
         padding: 15,
         marginBottom: 0,
-        justifyContent: "center", 
-        
-
+        justifyContent: 'center',
     },
-    iconInput:{
+    iconInput: {
         width: 28,
         height: 28,
         marginRight: 10
@@ -190,19 +187,15 @@ const styles = StyleSheet.create({
 
         fontSize: 30,
         color: 'white',
-
-
     },
     //ACTIVE
     text1: {
         color: 'white',
         backgroundColor: 'transparent',
         marginTop: 18,
-        textAlign: "center",
+        textAlign: 'center',
         height: 40,
-        fontWeight:'400',
-        
-        color: '#ffffff',
+        fontWeight: '400',
     },
 
     inactive: {
@@ -215,9 +208,9 @@ const styles = StyleSheet.create({
         padding: 10,
     },
     textInput: {
-        flexDirection: "row",
+        flexDirection: 'row',
         // justifyContent:"center",
-        alignItems: "center",
+        alignItems: 'center',
         backgroundColor: 'rgba(255, 255, 255, 0.4)',
         marginTop: 15,
         height: 40,
@@ -228,7 +221,7 @@ const styles = StyleSheet.create({
     },
     button: {
         height: 40,
-        alignItems: "center",
+        alignItems: 'center',
         justifyContent: 'center',
         backgroundColor: '#F035E0',
         marginTop: 15,
@@ -244,12 +237,12 @@ const styles = StyleSheet.create({
     },
     icon: {
         flex: 1,
-        alignItems: "center",
-        flexDirection: "row",
-        justifyContent:"center",
-        paddingLeft:60,
-        paddingRight:60
-       
+        alignItems: 'center',
+        flexDirection: 'row',
+        justifyContent: 'center',
+        paddingLeft: 60,
+        paddingRight: 60
+
     },
 
     iconimg: {
@@ -258,22 +251,18 @@ const styles = StyleSheet.create({
     },
     createAcc: {
         flex: 1,
-        alignItems: "center",
-        justifyContent:"center",
+        alignItems: 'center',
+        justifyContent: 'center',
         paddingVertical: 22,
-       
-
-
     },
     iconSoci: {
         flex: 1,
-        alignItems:"center",
-        
+        alignItems: 'center',
+
     },
     err: {
         color: '#111111',
-        paddingLeft:20,
-        paddingRight:5
+        paddingLeft: 20,
+        paddingRight: 5
     }
-
-})
+});

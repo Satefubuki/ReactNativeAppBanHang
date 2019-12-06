@@ -1,14 +1,14 @@
-import React, {Component } from 'react';
-import { View, Text } from 'react-native';
+import React, { Component } from 'react';
 import AppVideo from '../DetailProduct/ProductVideo';
 
 
 class Contact extends Component {
     render() {
         return (
-            <AppVideo/>
+            <AppVideo />
         );
     }
 }
 
+// eslint-disable-next-line eol-last
 export default Contact;

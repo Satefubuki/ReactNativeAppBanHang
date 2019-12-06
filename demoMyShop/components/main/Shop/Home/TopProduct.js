@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-expressions */
 import React, { Component } from 'react';
 import {
     View, Text, StyleSheet,
@@ -6,53 +7,47 @@ import {
 } from 'react-native';
 
 
-const { width } = Dimensions.get('window')
-const url = 'http://192.168.1.11/app/images/product/';
+const { width } = Dimensions.get('window');
+const url = 'http://192.168.1.3/app/images/product/';
 
 class TopProduct extends Component {
-    constructor(props){
+    constructor(props) {
         super(props);
-        this.state= {
+        this.state = {
             isloading: false,
-        }
+        };
     }
 
     gotoDetail(product) {
         const { navigator } = this.props;
         navigator.push({ name: 'PRODUCT_DETAIL', product });
     }
-    renderSeparator=(selectedId, rowId)=> {
-        if ( rowId % 2 === 1)
-        return 
-          <View
-            style={{
-            width,
-            height: 10,
-            }}
-          />;
-          return null;
-        
-      };
 
-    renderFooter = () => {
+    renderSeparator(selectedId, rowId) {
+        if (rowId % 2 === 1) return; 
+            <View style={{ width, height: 10, }} />;
+        return null;        
+        }
+
+    renderFooter() {
         if (!this.state.isloading) return null;
         return (
             <View
               style={{
                 paddingVertical: 20,
                 borderTopWidth: 1,
-                borderColor: "#CED0CE",
-                paddingBottom:80,
+                borderColor: '#CED0CE',
+                paddingBottom: 80,
               }}
             >
-              <ActivityIndicator animating size="large" />
+            <ActivityIndicator animating size="large" />
             </View>
           );
-        };
+        }
       
     render() {
         const { topProducts } = this.props;
-        const numColumns  = 2;
+        const numColumns = 2;
         const {
             container, titleContainer, title,
             body, product, productImage, productName,
@@ -62,25 +57,25 @@ class TopProduct extends Component {
         return (
             <View style={container}>
                 <View style={titleContainer}>
-                    <Text style={title}>Top Product</Text>
+                    <Text style={title}>Sản phẩm nổi bật</Text>
                 </View>
                 <FlatList
-                    numColumns={ numColumns }
-                    contentContainerStyle ={body}
-                    data={topProducts }
-                    renderItem = {({ item }) => (
-                                <TouchableOpacity onPress={() => this.gotoDetail(item)} style={product}  >
-                                    <Image source={{ uri: `${url}${item.images[0]}` }} style={productImage} />
-                                    <Text style={productName} >{item.name.toUpperCase()}</Text>
-                                    <Text style={productPrice}>{item.price}$</Text>
-                                </TouchableOpacity>
-                            )}
+                    numColumns={numColumns}
+                    contentContainerStyle={body}
+                    data={topProducts}
+                    renderItem={({ item }) => (
+                        <TouchableOpacity onPress={() => this.gotoDetail(item)} style={product} >
+                            <Image source={{ uri: `${url}${item.images[0]}` }} style={productImage} />
+                            <Text style={productName} >{item.name.toUpperCase()}</Text>
+                            <Text style={productPrice}>{item.price}$</Text>
+                            </TouchableOpacity>
+                        )}
                     // keyExtractor = { item => item.id} 
                     keyExtractor={item => item.id}
                     
                     // ItemSeparatorComponent={this.renderSeparator}
                    
-                    ListFooterComponent={this.renderFooter}
+                    //ListFooterComponent={this.renderFooter}
 
                 />
 
@@ -102,13 +97,13 @@ const styles = StyleSheet.create({
     },
     titleContainer: {
         height: 50,
-        justifyContent: "center",
+        justifyContent: 'center',
         paddingLeft: 10,
 
     },
     title: {
-        fontSize: 20,
-        color: '#AFAFAF',
+        fontSize: 18,
+        color: 'black',
         backgroundColor: 'transparent',
 
 
@@ -116,19 +111,19 @@ const styles = StyleSheet.create({
     body: {
         flex:1,
         // flexDirection: "column",
-        justifyContent: "center",
+        justifyContent: 'center',
         paddingBottom: 20,
-        alignItems:"center",
+        alignItems: 'center',
     },
     product: {
         width: productwidth,
         elevation: 5,
-        marginLeft:10,
-        marginRight:10,
-        alignItems:"center",
-        marginBottom:10,
+        marginLeft: 10,
+        marginRight: 10,
+        alignItems: 'center',
+        marginBottom: 10,
         borderWidth: 0.25,
-        borderColor: "#c3c6c8",
+        borderColor: '#c3c6c8',
           },
     productImage: {
         width: productwidth,
@@ -141,7 +136,7 @@ const styles = StyleSheet.create({
         marginVertical: 5,
         fontFamily: 'notoserif',
         color: '#AFAFAF',
-        textAlign: "center",
+        textAlign: 'center',
         fontWeight: '500',
 
     },
@@ -150,19 +145,9 @@ const styles = StyleSheet.create({
         marginBottom: 5,
         fontFamily: 'notoserif',
         color: '#C77DA6',
-        textAlign: "center",
+        textAlign: 'center',
         fontWeight: '500'
     }
-})
+});
+
 export default TopProduct;
-/*
- <View style={body}>
-                    {topProducts.map(e=>(
-                    <TouchableOpacity onPress = {()=>this.gotoDetail(e)}  style={product} key={e.id} >
-                        <Image source={{ uri: `${url}${e.images[0]}`}} style={productImage} />
-                        <Text style={productName} >{e.name.toUpperCase()}</Text>
-                        <Text style={productPrice}>{e.price}$</Text>
-                    </TouchableOpacity>
-                     ))}
-                </View>
-*/

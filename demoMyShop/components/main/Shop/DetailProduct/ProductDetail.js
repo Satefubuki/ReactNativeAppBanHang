@@ -7,19 +7,19 @@ import global from '../../../global';
 import back from '../../../../assets/img/back.png';
 import cart from '../../../../assets/img/cart.png';
 
-const url= 'http://192.168.1.11/app/images/product/';
+const url= 'http://192.168.1.3/app/images/product/';
 
 export default class ProductDetail extends Component {
     goBack() {
         const { navigator } = this.props;
         navigator.pop();
     }
-    addThisProductToCart(){
+    addThisProductToCart() {
         const { product } = this.props;
         global.addProductToCart(product);
     }
     render() {
-    const { price, name, images, description, material,color} = this.props.product;
+    const { price, name, images, description, material, color } = this.props.product;
         const {
             wrapper, cardStyle, header,
             footer, backStyle,
@@ -98,7 +98,7 @@ const styles = StyleSheet.create({
     },
     backStyle: {
         width: 40,
-        height:40
+        height: 40
     },
     productStyle: {
         width: width / 2,

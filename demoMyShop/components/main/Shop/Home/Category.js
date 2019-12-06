@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import {
     View, Text, StyleSheet, Dimensions,
-    Image, ImageBackground, TouchableOpacity
+    Image, TouchableOpacity
 } from 'react-native';
 import Swiper from 'react-native-swiper';
 // import xkhoang from '../../../../assets/sp/xkhoang.jpg';
@@ -9,16 +9,16 @@ import Swiper from 'react-native-swiper';
 // import serum from '../../../../assets/sp/serum.jpg';
 // import stdau from '../../../../assets/sp/stdau.jpg';
 
-const { width, height } = Dimensions.get('window');
-const url = 'http://192.168.1.9/app/images/type/';
+const { width, } = Dimensions.get('window');
+const url = 'http://192.168.1.3/app/images/type/';
 
 class Category extends Component {
     gotoListProduct(category) {
         const { navigator } = this.props;
-        navigator.push({ name: 'LIST_PRODUCT' , category})
+        navigator.push({ name: 'LIST_PRODUCT', category });
     }
     render() {
-        const { wapper, text, imageStyle, cateTitile } = styles;
+        const { wapper, text, imageStyle} = styles;
         const { types } = this.props;
         const swiper = (
             <Swiper showsPagination width={imageWidth} height={imageHeight} >
@@ -32,8 +32,8 @@ class Category extends Component {
 
         return (
             <View style={wapper}>
-                <View style={{ height: 50, justifyContent: "center" }}>
-                    <Text style={text}>List of Cosmetic</Text>
+                <View style={{ height: 50, justifyContent: 'center' }}>
+                    <Text style={text}>Danh sách sản phẩm</Text>
                 </View>
                 <View style={{ flex: 4, justifyContent: 'flex-end' }}>
                     { types.length ? swiper : null}
@@ -43,7 +43,6 @@ class Category extends Component {
     }
 }
 
-{/* //960*960 */ }
 const imageWidth = width - 40;
 const imageHeight = imageWidth / 2;
 
@@ -57,8 +56,8 @@ const styles = StyleSheet.create({
         paddingTop: 0
     },
     text: {
-        fontSize: 20,
-        color: '#AFAFAF',
+        fontSize: 18,
+        color: 'black',
 
     },
     imageStyle: {
@@ -72,6 +71,6 @@ const styles = StyleSheet.create({
         // fontFamily:'Avenir',
         color: '#7401DF',
     }
-})
+});
 
 export default Category;

@@ -33,6 +33,7 @@ export default class Authentication extends Component {
     }
     
     emailValidation = (email) => {
+	email = email.trim();
         if (!email) return false;
 		
         if (email.length > 150) return false;

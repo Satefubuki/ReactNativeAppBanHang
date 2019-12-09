@@ -1,5 +1,5 @@
 const recovery = (email) => (
-    fetch("192.168.1.3/app/recovery_pass.php",
+    fetch("http://192.168.1.3/app/recovery_pass.php",
         {   
             method: 'POST',
             headers: {

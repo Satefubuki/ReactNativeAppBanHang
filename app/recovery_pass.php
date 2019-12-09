@@ -49,7 +49,7 @@
     
         // Content
         $mail->isHTML(true);                                  // Set email format to HTML
-        $mail->Subject = 'Khôi phục mật khẩu';
+        $mail->Subject = 'Recovery password';
         $mail->Body    = 'Xin chào, '.$name.' <br> Đây là mật khẩu của bạn: <b>'.$en_pass.'</b>';
     
         $mail->send();

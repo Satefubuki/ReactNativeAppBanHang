@@ -103,11 +103,16 @@ export default class Forgot extends Component {
                             />
                         </View>
                 
+                            {(this.state.email !== '')?
                             <TouchableOpacity
                             style={button} 
                             onPress={this.recoveryPassword.bind(this)}>
                             <Text style={styles.text1}>Khôi phục</Text>
-                            </TouchableOpacity>
+                            </TouchableOpacity>:
+                            <TouchableOpacity
+                            style={button1} >
+                            <Text style={styles.text1}>Khôi phục</Text>
+                            </TouchableOpacity>}
                     </View>
                     <View style={styles.box2}>
                         <View style={styles.box2}>

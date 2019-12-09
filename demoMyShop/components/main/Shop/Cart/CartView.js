@@ -10,7 +10,7 @@ import global from '../../../global';
 function toTitleCase(str) {
     return str.replace(/\w\S*/g, txt => txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase());
 }
-const url = 'http://192.168.0.104:8080/app/images/product/';
+const url = 'http://192.168.1.3/app/images/product/';
 
 class CartView extends Component {
     incrQuantity(id) {

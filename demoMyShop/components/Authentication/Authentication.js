@@ -24,6 +24,10 @@ export default class Authentication extends Component {
         this.setState({ islogin: false, });
     }
 
+    gotoForgot = () => {
+        const { navigator } = this.props;
+        navigator.push({ name: "Forgot" });
+    }
     // login = ()=>{
     //     this.setState({ islogin: true });
     // }
@@ -80,6 +84,7 @@ export default class Authentication extends Component {
             gotoSignup={this.gotoSignup.bind(this)}
             emailValidation={this.emailValidation.bind(this)}
             passwordValidation={this.passwordValidation.bind(this)}
+            gotoForgot = {this.gotoForgot.bind(this)}
         /> : <Signup 
             gotoLogin={this.gotoLogin.bind(this)}
             emailValidation={this.emailValidation.bind(this)}

@@ -100,7 +100,7 @@ export default class Signup extends Component {
                             />
                         </View>
                         {(this.props.usernameValidation(this.state.username) || this.state.username === '') ? <Text style={{ height: 0 }} /> :
-                            <Text style={styles.err}>Username is invalid</Text>}
+                            <Text style={styles.err}>Tên không hợp lệ</Text>}
                         <View style={textInput}>
                             <Image style={iconInput} source={email} />
                             <TextInput
@@ -113,7 +113,7 @@ export default class Signup extends Component {
                             />
                         </View>
                         {(this.props.emailValidation(this.state.email) || this.state.email === '') ? <Text style={{ height: 0 }} /> :
-                            <Text style={styles.err}>Email is invalid</Text>}
+                            <Text style={styles.err}>Email không hợp lệ</Text>}
                         <View style={textInput}>
                             <Image style={iconInput} source={Iconpass} />
                             <TextInput
@@ -126,7 +126,7 @@ export default class Signup extends Component {
                             />
                         </View>
                         {(this.props.passwordValidation(this.state.password) || this.state.password === '') ? <Text style={{ height: 0 }} /> :
-                            <Text style={styles.err}>Password must contain at least 1 number and capital character</Text>}
+                            <Text style={styles.err}>Mật khẩu phải hơn 8 kí tự và có ít nhất một kí tự in hoa và một số</Text>}
                         <View style={textInput}>
                             <Image style={iconInput} source={Iconpass} />
                             <TextInput
@@ -140,7 +140,7 @@ export default class Signup extends Component {
                             />
                         </View>
                         {(this.checkRePass(this.state.password, this.state.repass) || this.state.repass === '') ? <Text style={{ height: 0 }} /> :
-                            <Text style={styles.err}>Re-type password is not correct</Text>}
+                            <Text style={styles.err}>Nhập lại mật khẩu không đúng</Text>}
 
                          {/* <TouchableOpacity style={button} onPress={this.registerUser.bind(this)}>
                             <Text style={text1}>SIGN UP</Text>
@@ -151,18 +151,18 @@ export default class Signup extends Component {
                             <TouchableOpacity
                             style={button}
                             onPress = {this.registerUser.bind(this)}>
-                            <Text style={styles.text1}>SIGN UP</Text>
+                            <Text style={styles.text1}>Đăng kí</Text>
                             </TouchableOpacity>:
                             <TouchableOpacity
                             disabled={true}
                             style={button1}>
-                            <Text style={styles.text1}>SIGN UP</Text>
+                            <Text style={styles.text1}>Đăng kí</Text>
                             </TouchableOpacity>}
                         
                     </View>
                     <View style={box3}>
                         <TouchableOpacity style={createAcc} onPress={() => this.props.gotoLogin()} >
-                            <Text style={inactive}>Login</Text>
+                            <Text style={inactive}>Đăng nhập</Text>
                         </TouchableOpacity>
                     </View>
                     {/* </View> */}

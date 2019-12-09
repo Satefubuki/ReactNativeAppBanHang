@@ -1,47 +1,68 @@
 import React, { Component } from 'react';
 import {
     View, Text, StyleSheet, TextInput, Image, ImageBackground,
-    TouchableOpacity,
+    TouchableOpacity, Icon,Alert,ActivityIndicator,Modal
 } from 'react-native';
+import recovery from '../../api/recovery_pass'
+import AnimatedLoader from 'react-native-animated-loader';
+import ProgressLoader from 'rn-progress-loader';
 
-
-import loGin from '../../api/login';
-import global from '../global';
-
-import saveToken from '../../api/saveToken';
 // import getToken from '../api/getToken';
 
-import background from '../../assets/img/wallpaper.png';
-import dog from '../../assets/img/dog.png';
+import background from '../../assets/img/wallpaper.png'
+import dog from '../../assets/img/dog.png'
 import IconUser from '../../assets/img/username.png';
-import Iconpass from '../../assets/img/password.png';
 import Iconfb from '../../assets/img/iconfb.png';
 import Icontt from '../../assets/img/icontt.png';
 import Icongg from '../../assets/img/google.png';
-import iconBack from '../../assets/img/iconBack.png';
+import iconBack from '../../assets/img/iconBack.png'
 
-export default class Login extends Component {
+
+export default class Forgot extends Component {
     constructor(props) {
         super(props);
-        const { user = null } = this.props;
-        const roleId = user ? user.roleId : '';
         this.state = {
-            email: '',
-            password: '',
-            roleId,
-            // kq: "Chưa login",
-        };
-    } 
+            email: "",
+            visible: false
+        }
+    }
+    onSuccess() {
+        Alert.alert(
+            'Notice',
+            'Mật khẩu đã gửi tới email của bạn, vui lòng kiểm tra!',
+            [
+                { text: 'OK'},
+            ],
+            { cancelable: false },
+        );
+    }
+    goBacktoMain() {
+        const { navigator } = this.props;
+        navigator.pop();
+    }
 
-    onLogin() {
-        const { email, password, roleId } = this.state;
-        loGin(email, password, roleId)
-            .then(res => {
-                global.onLogin(res.user.roleId === 1);
-                this.props.goBacktoMain();
-                saveToken(res.token);
-            })
-            .catch(e => console.log(e));
+    onFail() {
+        Alert.alert(
+            'Notice',
+            'Email không đúng !!!',
+            [
+                { text: 'OK'},
+            ],
+            { cancelable: false },
+        );
+    }
+    load() {
+        this.setState({visible:true});
+    }
+    recoveryPassword (){
+        const {email} = this.state;
+        recovery(email).then(this.load()).then(res =>{
+            console.log(res);
+            this.setState({visible:false});
+            (res.trim() !== 'fail')? this.onSuccess(): this.onFail();
+            this.setState({email:''});
+            }
+        )
     }
 
     render() {
@@ -49,9 +70,19 @@ export default class Login extends Component {
             text, textInput, button, button1, icon, iconimg
             , inactive, createAcc, iconSoci, iconInput
         } = styles;
-        //const { email, password }= this.state;
+        const { email }= this.state;
 
         return (
+            (this.state.visible === true)?
+                <AnimatedLoader
+                visible={true}
+                overlayColor="rgba(255,255,255,0.1)"
+                animationStyle={styles.lottie}
+                speed={1}
+                />
+               
+                :
+            
             <View style={wapper}>
                 <ImageBackground style={imageback} source={background}>
                     <View style={box2}>
@@ -62,47 +93,21 @@ export default class Login extends Component {
                     </View>
                     <View style={box1}>
                         <View style={textInput}>
-                            <Image style={iconInput} source={IconUser} />
+                            <Image style={iconInput} source={IconUser}></Image>
                             <TextInput
-                                // eslint-disable-next-line no-shadow
-                                onChangeText={text => this.setState({ email: text })}
+                                onChangeText={text => this.setState({ email : text})}
                                 value={this.state.email}
                                 placeholder="Enter your email"
                                 placeholderTextColor="white"
                                 autoCorrect={false}
                             />
                         </View>
-                        {(this.props.emailValidation(this.state.email) || this.state.email === '') ? <Text style={{ height: 0, }} /> :
-                        <Text style={styles.err}>Email không hợp lệ</Text>}
-                        <View style={textInput}>
-                            <Image style={iconInput} source={Iconpass} />
-                            <TextInput
-                            // eslint-disable-next-line no-shadow
-                                onChangeText={text => this.setState({ password: text })}
-                                value={this.state.password}
-                                secureTextEntry
-                                placeholder="Enter your Password"
-                                placeholderTextColor="white"
-                                autoCorrect={false}
-                            />
-                        </View>
-                        {(this.props.passwordValidation(this.state.password) || this.state.password === '') ? <Text style={{ height: 0, }} /> :
-                        <Text style={styles.err}>Mật khẩu phải hơn 8 kí tự và có ít nhất một kí tự in hoa và một số</Text>}
-                       
-                        {(this.props.passwordValidation(this.state.password) && this.props.emailValidation(this.state.email)) ?
+                
                             <TouchableOpacity
-                            style={button}
-                            onPress={this.onLogin.bind(this)}
-                            >
-                            <Text style={styles.text1}>Đăng nhập</Text>
-                            </TouchableOpacity> :
-                            <TouchableOpacity
-                            // eslint-disable-next-line react/jsx-boolean-value
-                            disabled={true}
-                            style={button1} 
-                            >
-                            <Text style={styles.text1}>Đăng nhập</Text>
-                            </TouchableOpacity>}
+                            style={button} 
+                            onPress={this.recoveryPassword.bind(this)}>
+                            <Text style={styles.text1}>Khôi phục</Text>
+                            </TouchableOpacity>
                     </View>
                     <View style={styles.box2}>
                         <View style={styles.box2}>
@@ -122,23 +127,20 @@ export default class Login extends Component {
                         </View>
                         <View style={styles.box3}>
                             {/*  onPress = {this.props.gotoSignup()} */}
-                            <TouchableOpacity style={createAcc} onPress={() => this.props.gotoSignup()}>
+                            <TouchableOpacity style={createAcc}>
                                 <Text style={inactive}>Tạo tài khoản</Text>
                             </TouchableOpacity>
-                            <TouchableOpacity style={createAcc} onPress={() =>this.props.gotoForgot()} >
+                            <TouchableOpacity style={createAcc} >
                                 <Text style={inactive}>Quên mật khẩu</Text>
                             </TouchableOpacity>
 
                         </View>
                         <TouchableOpacity
                             style={{
-                                marginBottom: 15, 
-                                flexDirection: 'row',
-                                justifyContent: 'center', 
-                                alignItems: 'center'
+                                marginBottom: 15, flexDirection: "row",
+                                justifyContent: "center", alignItems: "center"
                             }}
-                            onPress={() => this.props.goBacktoMain()} 
-                        >
+                            onPress={this.goBacktoMain.bind(this)}>
                             <Image style={{ width: 20, height: 20 }} source={iconBack} />
                             <Text style={{ color: '#BDBDBD', fontSize: 15 }}>Quay lại</Text>
                         </TouchableOpacity>
@@ -146,31 +148,40 @@ export default class Login extends Component {
 
                 </ImageBackground>
             </View>
-        );
+                        
+        )
     }
-}
 
+}
 const styles = StyleSheet.create({
     wapper: {
         flex: 1,
+
     },
     box1: {
+
         flex: 2,
     },
+
     box2: {
         flex: 2,
-        alignItems: 'center',
-        justifyContent: 'center',
+        alignItems: "center",
+        justifyContent: "center",
+
+
     },
     box3: {
         flex: 1,
-        flexDirection: 'row',
+        flexDirection: "row",
         padding: 15,
         marginBottom: 0,
-        justifyContent: 'center',
+        justifyContent: "center",
+
+
     },
 
     text: {
+
         fontSize: 30,
         color: 'white',
     },
@@ -179,9 +190,11 @@ const styles = StyleSheet.create({
         color: 'white',
         backgroundColor: 'transparent',
         marginTop: 18,
-        textAlign: 'center',
+        textAlign: "center",
         height: 40,
         fontWeight: '400',
+
+        color: '#ffffff',
     },
 
     inactive: {
@@ -194,9 +207,9 @@ const styles = StyleSheet.create({
         padding: 10,
     },
     textInput: {
-        flexDirection: 'row',
+        flexDirection: "row",
         // justifyContent:"center",
-        alignItems: 'center',
+        alignItems: "center",
         backgroundColor: 'rgba(255, 255, 255, 0.4)',
         marginTop: 15,
         height: 40,
@@ -207,7 +220,7 @@ const styles = StyleSheet.create({
     },
     button: {
         height: 40,
-        alignItems: 'center',
+        alignItems: "center",
         justifyContent: 'center',
         backgroundColor: '#F035E0',
         marginTop: 15,
@@ -217,7 +230,7 @@ const styles = StyleSheet.create({
     },
     button1: {
         height: 40,
-        alignItems: 'center',
+        alignItems: "center",
         justifyContent: 'center',
         backgroundColor: '#9C9C9C',
         marginTop: 15,
@@ -233,11 +246,12 @@ const styles = StyleSheet.create({
     },
     icon: {
         flex: 1,
-        alignItems: 'center',
-        flexDirection: 'row',
-        justifyContent: 'center',
+        alignItems: "center",
+        flexDirection: "row",
+        justifyContent: "center",
         paddingLeft: 60,
         paddingRight: 60
+
     },
 
     iconimg: {
@@ -246,14 +260,14 @@ const styles = StyleSheet.create({
     },
     createAcc: {
         flex: 1,
-        alignItems: 'center',
+        alignItems: "center",
         paddingVertical: 22,
 
 
     },
     iconSoci: {
         flex: 1,
-        alignItems: 'center',
+        alignItems: "center",
 
     },
     iconInput: {
@@ -263,7 +277,12 @@ const styles = StyleSheet.create({
     },
     err: {
         color: '#111111',
-        paddingLeft: 20,
-        paddingRight: 5
+        paddingLeft:20,
+        paddingRight:5
     },
+    lottie: {
+        width: 100,
+        height: 100,
+    },
+
 })

@@ -9,6 +9,8 @@ import OrderHistory from './components/OrderHistory/OrderHistory';
 import ChangeInFor from './components/ChangeInFor/ChangeInFor';
 import Login from './components/Authentication/Login';
 import Signup from './components/Authentication/Signup';
+import Forgot from './components/Authentication/Forgot'
+
 //thu
 // import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
 
@@ -27,7 +29,7 @@ export default function App() {
               //chuoi
               case 'Login' : return <Login navigator={navigator} />;
               case 'SignUp' : return <Signup navigator={navigator} />;
-
+              case 'Forgot' : return <Forgot navigator={navigator}/>;
               default: return <OrderHistory />;
             }
           }}

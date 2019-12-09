@@ -14,6 +14,5 @@ const refreshToken = ( token )=>{
     .then(res => res.text())
     .then(token => saveToken(token));
     
-);
 }
 export default refreshToken;

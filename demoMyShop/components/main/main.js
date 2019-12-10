@@ -10,7 +10,6 @@ import Shop from './Shop/Shop';
 import checkLogin from '../../api/checkLogin';
 import getToken from '../../api/getToken';
 import global from '../global';
-import SplashScreen from './Shop/Splash_screen';
 
 //eslint(space-before-blocks)
 export default class Main extends Component {
@@ -33,25 +32,9 @@ export default class Main extends Component {
   openControlPanel = () => {
     this._drawer.open();
   };
-  // eslint-disable-next-line react/sort-comp
-  async componentWillMount() {
-    const data = await this.performTimeConsumingTask();
-    if (data !== null) {
-      this.setState({ isLoading: false });
-    }
-  }
-
-  performTimeConsumingTask = async () => new Promise((resolve) =>
-      setTimeout(
-        () => { resolve('result'); },
-        2000
-      )
-    )
+  
   render() {
     const { navigator } = this.props;
-    if (this.state.isLoading) {
-      return <SplashScreen />;
-    } else {
       return (
         <Drawer
           tapToClose
@@ -65,4 +48,4 @@ export default class Main extends Component {
       );
     }
   }
-}
+

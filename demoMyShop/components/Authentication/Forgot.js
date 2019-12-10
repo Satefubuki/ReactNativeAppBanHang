@@ -1,21 +1,21 @@
 import React, { Component } from 'react';
 import {
     View, Text, StyleSheet, TextInput, Image, ImageBackground,
-    TouchableOpacity, Icon,Alert,ActivityIndicator,Modal
+    TouchableOpacity, Icon, Alert, ActivityIndicator,Modal
 } from 'react-native';
-import recovery from '../../api/recovery_pass'
+import recovery from '../../api/recovery_pass';
 import AnimatedLoader from 'react-native-animated-loader';
-import ProgressLoader from 'rn-progress-loader';
+//import ProgressLoader from 'rn-progress-loader';
 
 // import getToken from '../api/getToken';
 
-import background from '../../assets/img/wallpaper.png'
-import dog from '../../assets/img/dog.png'
+import background from '../../assets/img/wallpaper.png';
+import dog from '../../assets/img/dog.png';
 import IconUser from '../../assets/img/username.png';
 import Iconfb from '../../assets/img/iconfb.png';
 import Icontt from '../../assets/img/icontt.png';
 import Icongg from '../../assets/img/google.png';
-import iconBack from '../../assets/img/iconBack.png'
+import iconBack from '../../assets/img/iconBack.png';
 
 
 export default class Forgot extends Component {

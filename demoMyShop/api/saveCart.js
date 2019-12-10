@@ -5,7 +5,7 @@ const saveCart = async (carts) => {
         await AsyncStorage.setItem('@cart', JSON.stringify(carts));
     }
     catch (error) {
-        console.log('Dont save cart')
+        console.log('Dont save cart');
     }
 };
 

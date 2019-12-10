@@ -4,9 +4,7 @@ const saveToken = async (token) => {
     try {
         await AsyncStorage.setItem('@token', token);
         return 'SUCCESS';
-    // eslint-disable-next-line brace-style
-    }
-    catch (error) {
+    } catch (error) {
         console.log('Dont save token');
     }
 };

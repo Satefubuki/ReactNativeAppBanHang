@@ -1,5 +1,4 @@
- const regiter = (email, name, password, roleId) => (
-    // eslint-disable-next-line no-undef
+ const regiter = (email, name, password) => (
     fetch('http://192.168.1.3/app/register.php',
         {   
             method: 'POST',

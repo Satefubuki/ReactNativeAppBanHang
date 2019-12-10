@@ -37,7 +37,7 @@ export default class Login extends Component {
         const { email, password, roleId } = this.state;
         loGin(email, password, roleId)
             .then(res => {
-                global.onLogin(res.user.roleId === 1);
+                global.onLogin(res.user);
                 this.props.goBacktoMain();
                 saveToken(res.token);
             })

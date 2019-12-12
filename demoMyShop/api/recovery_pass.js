@@ -1,15 +1,15 @@
- const regiter = (email, name, password) => (
-    fetch('http://192.168.1.7/app/register.php',
+const recovery = (email) => (
+    fetch('http://192.168.1.7/app/recovery_pass.php',
         {   
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
                 Accept: 'application/json'
             },
-            body: JSON.stringify({ email, name, password })
+            body: JSON.stringify({ email })
         })
         .then(res => res.text())
 
  );
 
- module.exports = regiter ;
+ module.exports = recovery ;

@@ -17,7 +17,7 @@ export default class OrderHistory extends Component {
     render() {
         const { container, wapper, header,
              imgHeader, txtHeader, styleContainer,
-             title, txtInfo } = styples;
+             title, txtInfo } = styles;
         return (
             <View style={container}>
                 <View style={header}>
@@ -96,7 +96,7 @@ export default class OrderHistory extends Component {
         )
     }
 }
-const styples = StyleSheet.create({
+const styles = StyleSheet.create({
     container: {
         flex: 1,
         

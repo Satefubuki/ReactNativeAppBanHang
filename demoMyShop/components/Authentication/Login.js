@@ -1,3 +1,4 @@
+/* eslint-disable no-else-return */
 import React, { Component } from 'react';
 import {
     View, Text, StyleSheet, TextInput, Image, ImageBackground,
@@ -19,27 +20,31 @@ import Iconfb from '../../assets/img/iconfb.png';
 import Icontt from '../../assets/img/icontt.png';
 import Icongg from '../../assets/img/google.png';
 import iconBack from '../../assets/img/iconBack.png';
+import AddProduct from '../Admin/AddPproduct';
 
 export default class Login extends Component {
     constructor(props) {
         super(props);
-        const { user = null } = this.props;
-        const roleId = user ? user.roleId : '';
         this.state = {
             email: '',
             password: '',
-            roleId,
-            // kq: "Chưa login",
         };
-    } 
+    }
 
     onLogin() {
-        const { email, password, roleId } = this.state;
-        loGin(email, password, roleId)
+        //email, password kiem tra data nhap vao
+        const { email, password } = this.state;
+        loGin(email, password)
             .then(res => {
                 global.onLogin(res.user);
-                this.props.goBacktoMain();
-                saveToken(res.token);
+                //login voi vai tro user thi luu lai token cho lan sau k can dang nhap
+                if (res.user.role_id === '1') {
+                    saveToken(res.token); 
+                    return this.props.goBacktoMain();   
+                    //login voi vai tro la admin thi khong luu lai token                   
+                } else if (res.user.role_id === '2') {
+                    return this.props.gotoAddProduct();
+                } else { return console.log('chua xac dinh vai tro'); }     
             })
             .catch(e => console.log(e));
     }
@@ -73,11 +78,11 @@ export default class Login extends Component {
                             />
                         </View>
                         {(this.props.emailValidation(this.state.email) || this.state.email === '') ? <Text style={{ height: 0, }} /> :
-                        <Text style={styles.err}>Email không hợp lệ</Text>}
+                            <Text style={styles.err}>Email không hợp lệ</Text>}
                         <View style={textInput}>
                             <Image style={iconInput} source={Iconpass} />
                             <TextInput
-                            // eslint-disable-next-line no-shadow
+                                // eslint-disable-next-line no-shadow
                                 onChangeText={text => this.setState({ password: text })}
                                 value={this.state.password}
                                 secureTextEntry
@@ -87,27 +92,27 @@ export default class Login extends Component {
                             />
                         </View>
                         {(this.props.passwordValidation(this.state.password) || this.state.password === '') ? <Text style={{ height: 0, }} /> :
-                        <Text style={styles.err}>Mật khẩu phải hơn 8 kí tự và có ít nhất một kí tự in hoa và một số</Text>}
-                       
+                            <Text style={styles.err}>Mật khẩu phải hơn 8 kí tự và có ít nhất một kí tự in hoa và một số</Text>}
+
                         {(this.props.passwordValidation(this.state.password) && this.props.emailValidation(this.state.email)) ?
                             <TouchableOpacity
-                            style={button}
-                            onPress={this.onLogin.bind(this)}
+                                style={button}
+                                onPress={this.onLogin.bind(this)}
                             >
-                            <Text style={styles.text1}>Đăng nhập</Text>
+                                <Text style={styles.text1}>Đăng nhập</Text>
                             </TouchableOpacity> :
                             <TouchableOpacity
-                            // eslint-disable-next-line react/jsx-boolean-value
-                            disabled={true}
-                            style={button1} 
+                                // eslint-disable-next-line react/jsx-boolean-value
+                                disabled={true}
+                                style={button1}
                             >
-                            <Text style={styles.text1}>Đăng nhập</Text>
+                                <Text style={styles.text1}>Đăng nhập</Text>
                             </TouchableOpacity>}
                     </View>
                     <View style={styles.box2}>
                         <View style={styles.box2}>
                             <Text style={{ color: '#BDBDBD', fontSize: 14 }}>Hoặc</Text>
-                            <Text style={{ color: '#BDBDBD', fontSize: 14 }}>Đăng nhập với</Text>
+                            <Text style={{ color: '#BDBDBD', fontSize: 14 }}>Đăng nhập </Text>
                             <View style={icon}>
                                 <TouchableOpacity style={iconSoci}>
                                     <Image style={iconimg} source={Iconfb} />
@@ -125,19 +130,19 @@ export default class Login extends Component {
                             <TouchableOpacity style={createAcc} onPress={() => this.props.gotoSignup()}>
                                 <Text style={inactive}>Tạo tài khoản</Text>
                             </TouchableOpacity>
-                            <TouchableOpacity style={createAcc} onPress={() =>this.props.gotoForgot()} >
+                            <TouchableOpacity style={createAcc} onPress={() => this.props.gotoForgot()} >
                                 <Text style={inactive}>Quên mật khẩu</Text>
                             </TouchableOpacity>
 
                         </View>
                         <TouchableOpacity
                             style={{
-                                marginBottom: 15, 
+                                marginBottom: 15,
                                 flexDirection: 'row',
-                                justifyContent: 'center', 
+                                justifyContent: 'center',
                                 alignItems: 'center'
                             }}
-                            onPress={() => this.props.goBacktoMain()} 
+                            onPress={() => this.props.goBacktoMain()}
                         >
                             <Image style={{ width: 20, height: 20 }} source={iconBack} />
                             <Text style={{ color: '#BDBDBD', fontSize: 15 }}>Quay lại</Text>
@@ -266,4 +271,4 @@ const styles = StyleSheet.create({
         paddingLeft: 20,
         paddingRight: 5
     },
-})
+});

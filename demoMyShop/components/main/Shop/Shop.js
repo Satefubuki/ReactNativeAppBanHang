@@ -102,7 +102,7 @@ constructor(props) {
         );
       })
       .catch((e) => {
-        console.log(e)
+        console.log(e);
       });
     getCart()
       .then(carts => this.setState({ carts }));

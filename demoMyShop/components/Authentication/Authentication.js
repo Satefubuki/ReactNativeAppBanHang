@@ -26,14 +26,17 @@ export default class Authentication extends Component {
 
     gotoForgot = () => {
         const { navigator } = this.props;
-        navigator.push({ name: "Forgot" });
+        navigator.push({ name: 'Forgot' });
     }
-    // login = ()=>{
-    //     this.setState({ islogin: true });
-    // }
+    
     goBacktoMain = () => {
         const { navigator } = this.props;
         navigator.pop();
+    }
+
+    gotoAddProduct = () => {
+        const { navigator } = this.props;
+        navigator.push({ name: 'Admin' });
     }
     
     emailValidation = (email) => {
@@ -80,16 +83,18 @@ export default class Authentication extends Component {
         
         const main = islogin ? 
         <Login 
-            goBacktoMain={this.goBacktoMain.bind(this) }
+            gotoAddProduct={this.gotoAddProduct.bind(this)}
+            goBacktoMain={this.goBacktoMain.bind(this)}
             gotoSignup={this.gotoSignup.bind(this)}
             emailValidation={this.emailValidation.bind(this)}
             passwordValidation={this.passwordValidation.bind(this)}
-            gotoForgot = {this.gotoForgot.bind(this)}
+            gotoForgot={this.gotoForgot.bind(this)}
         /> : <Signup 
             gotoLogin={this.gotoLogin.bind(this)}
             emailValidation={this.emailValidation.bind(this)}
             passwordValidation={this.passwordValidation.bind(this)}
-            usernameValidation={this.usernameValidation.bind(this)} />;
+            usernameValidation={this.usernameValidation.bind(this)} 
+        />;
         return (
             <View style={{ flex: 1, }}>
             { main }

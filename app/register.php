@@ -6,10 +6,9 @@ $obj = json_decode($json, true);
 $name = $obj['name'];
 $email = $obj['email'];
 $password = md5($obj['password']);
-//$role_id = $obj['role_id'];
-if($name !='' && $email != '' && $password!='' ){
+if($name !='' && $email != '' && $password!=''){
 	
-	$sql = "INSERT INTO users(email,password,name,role_id ) VALUES('$email','$password','$name', 1)";
+	$sql = "INSERT INTO users(email,password,name, role_id) VALUES('$email','$password','$name',1)";
 	$result = $mysqli->query($sql);
 	if($result){
 		echo 'THANH_CONG';

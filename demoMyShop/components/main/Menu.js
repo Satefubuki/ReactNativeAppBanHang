@@ -44,6 +44,7 @@ class Menu extends Component {
         const { navigator } = this.props;
         navigator.push({ name: "OrderHistory" });
     }
+    
  
     render() {
         const { container, image, button,

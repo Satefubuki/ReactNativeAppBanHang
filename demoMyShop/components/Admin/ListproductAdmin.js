@@ -1,53 +1,45 @@
-/* eslint-disable no-undef */
-/* eslint-disable quotes */
 import React, { Component } from 'react';
-import { View, Dimensions, TouchableOpacity, 
-    TextInput, Image, StatusBar, StyleSheet } from 'react-native';
-    
-import Avarta from '../../../assets/img/bun.jpg';
-import IconS from '../../../assets/img/iconSearch.png';
-import global from '../../global';
-import searchProduct from '../../../api/searchProduct';
+import { View, Dimensions, StatusBar, StyleSheet, TouchableOpacity, 
+    Image, TextInput } from 'react-native';
+
+import Avarta from '../../assets/img/bun.jpg';
+import IconS from '../../assets/img/iconSearch.png';
+import global from '../global';
+
 
 StatusBar.setHidden(true);
 const { height } = Dimensions.get('window');
 const { width } = Dimensions.get('window');
 
-export default class Header extends Component {
+export default class ListproductAdmin extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            search: "",
+            search: '',
 
         };
     }
-
-onSearch = () => {
-    const { txtSearch } = this.state;
-    searchProduct(txtSearch)
-    .then(arrProduct => console.log(arrProduct))
-    .catch(e => console.log(e));
-}
-
     render() {
         return (
             <View style={styles.wapper}>
-                <View style={{ width: width / 7, alignItems: "center" }}>
+                <View style={{ width: width / 7, alignItems: 'center' }}>
                     <TouchableOpacity onPress={this.props.onOpen}>
                         <Image style={styles.img1} source={Avarta} />
                     </TouchableOpacity>
                 </View>
-                <View style={{ flex: 1, flexDirection: "row" }}>
+                <View style={{ flex: 1, flexDirection: 'row' }}>
                     <Image style={styles.img2} source={IconS} />
                     <TextInput
+                        //source={Avarta}
                         style={styles.textInput}
+                        // eslint-disable-next-line no-undef
                         onChangeText={text => onChangeText(text)}
                         value={this.state.search}
-                        placeholder=" Bạn tìm mỹ phẩm Mizu Shop"
-                        placeholderTextColor="rgb(148,148,205)"
+                        placeholder=" Tìm kiếm sản phẩm"
+                        placeholderTextColor="white"
                         onChangeText={text => this.setState({ search: text })}
-                        onFocus={() => global.gotoSearch()}
-                        onSubmitEditing={this.onSearch.bind(this)}
+                        //onFocus={() => global.gotoSearch()}
+                        //onSubmitEditing={this.onSearch.bind(this)}
                     />
                     
                 </View>
@@ -60,7 +52,7 @@ const styles = StyleSheet.create({
     wapper: {
         height: height / 11,
         padding: 8,
-        flexDirection: "row",
+        flexDirection: 'row',
         backgroundColor: '#FE2EC8',
         elevation: 5,
     },
@@ -79,6 +71,7 @@ const styles = StyleSheet.create({
         height: 35,
         borderBottomWidth: 1, 
         borderRadius: 30, 
-        borderBottomColor: "#CFD8DC",
+        borderBottomColor: '#CFD8DC',
     }
 });
+   

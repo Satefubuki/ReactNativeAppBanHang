@@ -1,18 +1,23 @@
 /* eslint-disable no-extra-semi */
 import React, { Component } from 'react';
-import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
+import { View, Text, TouchableOpacity, 
+    StyleSheet, Image, Dimensions } from 'react-native';
+
+import back from '../../assets/img/backOrder.png';
+
+const { width, height } = Dimensions.get('window');
+
 
 export default class AddPproduct extends Component {
     render() {
-        const { container, wapper, header,
-            imgHeader, txtHeader, styleContainer,
-            title, txtInfo } = styles;
+        const { container, header,
+            imgHeader, txtHeader, } = styles;
         return (
             <View style={container}>
                 <View style={header}>
                         <View style={{ with: 30 }} />
                         <Text style={txtHeader}>Order History</Text>
-                        <TouchableOpacity onPress={this.goBacktoMain.bind(this)} >
+                        <TouchableOpacity >
                             <Image style={imgHeader} source={back} />
                         </TouchableOpacity>
                 </View>

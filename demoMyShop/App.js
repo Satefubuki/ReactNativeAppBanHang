@@ -10,7 +10,8 @@ import Login from './components/Authentication/Login';
 import Signup from './components/Authentication/Signup';
 import Forgot from './components/Authentication/Forgot';
 import SplashScreen from './components/main/Shop/Splash_screen';
-import AddProduct from './components/Admin/AddPproduct';
+import ListproductAdmin from './components/Admin/ListproductAdmin';
+//import ListProduct from './components/main/Shop/ListProduct/ListProduct';
 
 export default class App extends Component {
   constructor(props) {
@@ -49,7 +50,7 @@ export default class App extends Component {
               case 'Login': return <Login navigator={navigator} />;
               case 'SignUp': return <Signup navigator={navigator} />;
               case 'Forgot': return <Forgot navigator={navigator} />;
-              case 'Admin': return <AddProduct navigator={navigator} />;
+              case 'Admin': return <ListproductAdmin navigator={navigator} />;
               default: return <OrderHistory />;
             }
           }}

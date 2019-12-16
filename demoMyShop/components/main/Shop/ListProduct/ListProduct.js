@@ -19,7 +19,7 @@ export default class ListProduct extends Component {
             loading: false,
             refreshing: false,
             listProduct: [],
-            page: 1, 
+            page: 1,
         };
         this.arr = [];
     }
@@ -30,13 +30,14 @@ export default class ListProduct extends Component {
             .then(arrProduct => {
                 this.arr = arrProduct;
                 this.setState({
-                    listProduct: this.arr ,
+                    listProduct: this.arr,
                     loading: false,
                     refreshing: false,
-                })
-                console.log(arrProduct)
+                });
+
+                console.log(arrProduct);
             })
-            .catch(e => console.log(e) )
+            .catch(e => console.log(e));
     }
     goBack() {
         const { navigator } = this.props;
@@ -44,7 +45,7 @@ export default class ListProduct extends Component {
     }
     goToDetail(product) {
         const { navigator } = this.props;
-        navigator.push({ name: 'PRODUCT_DETAIL', product })
+        navigator.push({ name: 'PRODUCT_DETAIL', product });
     }
 
     handleRefresh() {
@@ -61,7 +62,7 @@ export default class ListProduct extends Component {
         const idType = this.props.category.id;
         getListProductPage(idType, newpage)
             .then(arrProduct => {
-                this.arr = arrProduct.concat(this.arr)
+                this.arr = arrProduct.concat(this.arr);
                 this.setState({
                     ...this.state,
                     listProduct: this.arr,
@@ -69,7 +70,7 @@ export default class ListProduct extends Component {
 
                 });
             })
-            .catch(e => console.log(e))
+            .catch(e => console.log(e));
     }
     renderSeparator() {
         return (
@@ -88,23 +89,23 @@ export default class ListProduct extends Component {
         if (!this.state.refreshing) return null;
         return (
             <View
-              style={{
-                paddingVertical: 20,
-                borderTopWidth: 1,
-                borderColor: '#CED0CE'
-              }}
+                style={{
+                    paddingVertical: 20,
+                    borderTopWidth: 1,
+                    borderColor: '#CED0CE'
+                }}
             >
-              <ActivityIndicator animating size="large" />
+                <ActivityIndicator animating size="large" />
             </View>
-          );
-        };
+        );
+    };
 
-render() {
+    render() {
         const { listProduct } = this.state;
         const { category } = this.props;
         const { container, wapper, header, backStyle, titleStyle,
             proContainer, proImg, lastRowInfo, productInfo,
-            txtName, txtPrice, txtMaterial, txtColor, txtShowDetail
+            txtName, txtPrice, txtUnit, txtColor, txtShowDetail
 
         } = styles;
         return (
@@ -125,11 +126,14 @@ render() {
                                 <Image source={{ uri: `${url}${item.images[0]}` }} style={proImg} />
                                 <View style={productInfo}>
                                     <Text style={txtName}>{item.name}</Text>
-                                    <Text style={txtPrice}>{item.price}</Text>
-                                    <Text style={txtMaterial}>{item.txtMaterial}</Text>
+                                    <View style={{ flexDirection: "row" }}>
+                                        <Text style={txtUnit}>đ</Text>
+                                        <Text style={txtPrice}>{item.price}.000</Text>
+
+                                    </View>
                                     <View style={lastRowInfo}>
-                                        <Text style={txtColor}>{item.color}</Text>
-                                        <View style={{ backgroundColor: item.color.toLowerCase(), height: 16, width: 16, borderRadius: 8 }} />
+                                        <Text style={txtColor}></Text>
+                                        {/* <View style={{ backgroundColor: item.color.toLowerCase(), height: 16, width: 16, borderRadius: 8 }} /> */}
                                         <TouchableOpacity onPress={() => { this.goToDetail(item) }}>
                                             <Text style={txtShowDetail}>Show Detail</Text>
                                         </TouchableOpacity>
@@ -141,7 +145,7 @@ render() {
                         // ItemSeparatorComponent={this.renderSeparator}
                         refreshing={this.state.refreshing}
                         onRefresh={this.handleRefresh.bind(this)}
-                        keyExtractor={(item, index)=> index.toString()}
+                        keyExtractor={(item, index) => index.toString()}
                         ListFooterComponent={this.renderFooter}
                     />
                 </View>
@@ -207,19 +211,26 @@ const styles = StyleSheet.create({
 
     },
     txtName: {
-        color: '#AFAFAF',
-        fontSize: 17,
+        color: 'black',
+        fontSize: 20,
         fontWeight: '100'
 
     },
     txtPrice: {
         color: '#8E24AA',
-
+        fontSize: 20
+        ,
     },
-    txtMaterial: {},
+    txtUnit: {
+        color: '#8E24AA',
+        fontSize: 18,
+        borderBottomWidth: 1,
+        borderBottomColor: "#8E24AA",
+    },
     txtColor: {},
     txtShowDetail: {
         color: '#8E24AA',
+
     },
 
 

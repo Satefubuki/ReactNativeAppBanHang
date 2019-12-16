@@ -20,7 +20,7 @@ import Iconfb from '../../assets/img/iconfb.png';
 import Icontt from '../../assets/img/icontt.png';
 import Icongg from '../../assets/img/google.png';
 import iconBack from '../../assets/img/iconBack.png';
-import AddProduct from '../Admin/AddPproduct';
+import AddProduct from '../Admin/AddProduct';
 
 export default class Login extends Component {
     constructor(props) {

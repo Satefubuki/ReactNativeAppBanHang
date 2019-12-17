@@ -34,9 +34,9 @@ export default class Authentication extends Component {
         navigator.pop();
     }
 
-    gotoAddProduct = () => {
+    gotoAdmin = () => {
         const { navigator } = this.props;
-        navigator.push({ name: 'Admin' });
+        navigator.push({ name: 'MenuAdmin' });
     }
     
     emailValidation = (email) => {

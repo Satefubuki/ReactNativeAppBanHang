@@ -4,7 +4,7 @@ import React, { Component } from 'react';
 import { View, Dimensions, TouchableOpacity, 
     TextInput, Image, StatusBar, StyleSheet } from 'react-native';
     
-import Avarta from '../../../assets/img/bun.jpg';
+import Avarta from '../../../assets/img/tabbar.png';
 import IconS from '../../../assets/img/iconSearch.png';
 import global from '../../global';
 import searchProduct from '../../../api/searchProduct';
@@ -44,7 +44,7 @@ onSearch = () => {
                         onChangeText={text => onChangeText(text)}
                         value={this.state.search}
                         placeholder=" Bạn tìm mỹ phẩm Mizu Shop"
-                        placeholderTextColor="rgb(148,148,205)"
+                        placeholderTextColor="white"
                         onChangeText={text => this.setState({ search: text })}
                         onFocus={() => global.gotoSearch()}
                         onSubmitEditing={this.onSearch.bind(this)}
@@ -65,9 +65,11 @@ const styles = StyleSheet.create({
         elevation: 5,
     },
     img1: {
-        width: 40,
-        height: 40,
-        borderRadius: 40 / 2
+        marginTop: 8,
+        marginRight: 5,
+        width: 30,
+        height: 30,
+        //borderRadius: 40 / 2
     },
     img2: {
         width: 25, 

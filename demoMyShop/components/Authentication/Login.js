@@ -5,22 +5,18 @@ import {
     TouchableOpacity,
 } from 'react-native';
 
-
 import loGin from '../../api/login';
 import global from '../global';
-
 import saveToken from '../../api/saveToken';
-// import getToken from '../api/getToken';
 
 import background from '../../assets/img/wallpaper.png';
-import dog from '../../assets/img/dog.png';
+import logo from '../../assets/img/logo.png';
 import IconUser from '../../assets/img/username.png';
 import Iconpass from '../../assets/img/password.png';
 import Iconfb from '../../assets/img/iconfb.png';
 import Icontt from '../../assets/img/icontt.png';
-import Icongg from '../../assets/img/google.png';
+import Icongg from '../../assets/img/icongg.png';
 import iconBack from '../../assets/img/iconBack.png';
-import AddProduct from '../Admin/AddProduct';
 
 export default class Login extends Component {
     constructor(props) {
@@ -43,7 +39,7 @@ export default class Login extends Component {
                     return this.props.goBacktoMain();   
                     //login voi vai tro la admin thi khong luu lai token                   
                 } else if (res.user.role_id === '2') {
-                    return this.props.gotoAddProduct();
+                    return this.props.gotoAdmin();
                 } else { return console.log('chua xac dinh vai tro'); }     
             })
             .catch(e => console.log(e));
@@ -61,7 +57,7 @@ export default class Login extends Component {
                 <ImageBackground style={imageback} source={background}>
                     <View style={box2}>
                         <View>
-                            <Image style={{ width: 150, height: 150, }} source={dog} />
+                            <Image style={{ width: 130, height: 130, }} source={logo} />
                         </View>
                         <Text style={text}>Mizu</Text>
                     </View>
@@ -176,7 +172,7 @@ const styles = StyleSheet.create({
     },
 
     text: {
-        fontSize: 30,
+        fontSize: 32,
         color: 'white',
     },
     //ACTIVE

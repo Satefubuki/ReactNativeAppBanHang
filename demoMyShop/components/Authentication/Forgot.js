@@ -10,11 +10,11 @@ import AnimatedLoader from 'react-native-animated-loader';
 // import getToken from '../api/getToken';
 
 import background from '../../assets/img/wallpaper.png';
-import dog from '../../assets/img/dog.png';
+import logo from '../../assets/img/logo.png';
 import IconUser from '../../assets/img/username.png';
 import Iconfb from '../../assets/img/iconfb.png';
 import Icontt from '../../assets/img/icontt.png';
-import Icongg from '../../assets/img/google.png';
+import Icongg from '../../assets/img/icongg.png';
 import iconBack from '../../assets/img/iconBack.png';
 
 
@@ -87,7 +87,7 @@ export default class Forgot extends Component {
                 <ImageBackground style={imageback} source={background}>
                     <View style={box2}>
                         <View>
-                            <Image style={{ width: 150, height: 150, }} source={dog} />
+                            <Image style={{ width: 130, height: 130, }} source={logo} />
                         </View>
                         <Text style={text}>Mizu</Text>
                     </View>
@@ -161,10 +161,8 @@ export default class Forgot extends Component {
 const styles = StyleSheet.create({
     wapper: {
         flex: 1,
-
     },
     box1: {
-
         flex: 2,
     },
 
@@ -172,8 +170,6 @@ const styles = StyleSheet.create({
         flex: 2,
         alignItems: "center",
         justifyContent: "center",
-
-
     },
     box3: {
         flex: 1,
@@ -182,12 +178,10 @@ const styles = StyleSheet.create({
         marginBottom: 0,
         justifyContent: "center",
 
-
     },
 
     text: {
-
-        fontSize: 30,
+        fontSize: 32,
         color: 'white',
     },
     //ACTIVE

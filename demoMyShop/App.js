@@ -10,8 +10,9 @@ import Login from './components/Authentication/Login';
 import Signup from './components/Authentication/Signup';
 import Forgot from './components/Authentication/Forgot';
 import SplashScreen from './components/main/Shop/Splash_screen';
-import ListproductAdmin from './components/Admin/ListproductAdmin';
+import HomeAdmin from './components/Admin/HomeAdmin/HomeAdmin';
 //import ListProduct from './components/main/Shop/ListProduct/ListProduct';
+import MenuAdmin from './components/Admin/MenuAdmin';
 
 export default class App extends Component {
   constructor(props) {
@@ -39,7 +40,7 @@ export default class App extends Component {
     } else {
       return (
         <Navigator
-          initialRoute={{ name: 'Main' }}
+          initialRoute={{ name: 'MenuAdmin' }}
           renderScene={(route, navigator) => {
             switch (route.name) {
               case 'Main': return <Main navigator={navigator} />;
@@ -50,7 +51,8 @@ export default class App extends Component {
               case 'Login': return <Login navigator={navigator} />;
               case 'SignUp': return <Signup navigator={navigator} />;
               case 'Forgot': return <Forgot navigator={navigator} />;
-              case 'Admin': return <ListproductAdmin navigator={navigator} />;
+              case 'HomeAdmin': return <HomeAdmin navigator={navigator} />;
+              case 'MenuAdmin': return <MenuAdmin />;
               default: return <OrderHistory />;
             }
           }}

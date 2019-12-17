@@ -10,7 +10,7 @@ import backList from '../../../../assets/img/backList.png';
 import getListProductPage from '../../../../api/getListProductPage';
 
 const { height } = Dimensions.get('window');
-const url = 'http://192.168.1.3/app/images/product/';
+const url = 'http://192.168.1.7/app/images/product/';
 
 export default class ListProduct extends Component {
     constructor(props) {
@@ -132,8 +132,7 @@ export default class ListProduct extends Component {
 
                                     </View>
                                     <View style={lastRowInfo}>
-                                        <Text style={txtColor}></Text>
-                                        {/* <View style={{ backgroundColor: item.color.toLowerCase(), height: 16, width: 16, borderRadius: 8 }} /> */}
+                                        <Text style={txtColor} />
                                         <TouchableOpacity onPress={() => { this.goToDetail(item) }}>
                                             <Text style={txtShowDetail}>Show Detail</Text>
                                         </TouchableOpacity>
@@ -185,8 +184,6 @@ const styles = StyleSheet.create({
         borderTopColor: '#F0F0F0',
         borderTopWidth: 1,
         // marginBottom:10,
-
-
     },
     titleStyle: {
         fontSize: 17,

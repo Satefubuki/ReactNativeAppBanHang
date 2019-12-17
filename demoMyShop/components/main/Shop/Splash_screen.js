@@ -1,45 +1,46 @@
-import React, { Component} from 'react';
-import { Text, View, StyleSheet, ImageBackground, Dimensions} from 'react-native';
+import React, { Component } from 'react';
+import { Text, View, StyleSheet, ImageBackground, Dimensions } from 'react-native';
 
 const SCREEN_HEIGHT = Dimensions.get('window').height;
 
 class SplashScreen extends Component {
   render() {
+    const { container, imgBackground, textStyles } = styles;
     return (
-        <View style={styles.container}>
-        <ImageBackground style={styles.imgBackground } 
-        resizeMode='cover' 
-        source={{uri: 'https://sohanews.sohacdn.com/thumb_w/660/2015/hinh-anh-doremon-che-1433126192951-0-0-522-710-crop-1433126536330.jpg'}}>
-            <Text style={styles.textStyles}>
-                Comestic App
-            </Text>
+      <View style={container}>
+        <ImageBackground
+          style={imgBackground}
+          resizeMode='cover'
+          source={{ uri: 'https://oatcosmetics.com/wp-content/uploads/2015/12/Colour-Cosmetics-Face_small-600x400.png' }} >
+          <Text style={textStyles}>
+            Mizu Cosmetic App
+          </Text>
         </ImageBackground>
-        
-    </View>
+      </View >
     );
   }
 }
 export default SplashScreen;
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        justifyContent: 'center',
-        backgroundColor: '#ecf0f1',
-        padding: 8,
-      },
-    textStyles: {
-      margin: 10,
-      marginTop: SCREEN_HEIGHT / 2,
-      fontSize: 30,
-      color: 'violet',
-      fontWeight: 'bold',
-      textAlign: 'center',
-      justifyContent: 'center'
-    },
-    imgBackground: {
-        opacity: 0.4,
-        width: '100%',
-        height: '100%',
-        flex: 1 
-},
-  });
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    backgroundColor: '#ecf0f1',
+    padding: 8,
+  },
+  textStyles: {
+    margin: 10,
+    marginTop: SCREEN_HEIGHT / 2,
+    fontSize: 32,
+    color: 'violet',
+    fontWeight: 'bold',
+    textAlign: 'center',
+    justifyContent: 'center'
+  },
+  imgBackground: {
+    // opacity: 0.4,
+    width: '100%',
+    height: '100%',
+    flex: 1
+  },
+});

@@ -49,7 +49,6 @@ constructor(props) {
     global.decrQuantity = this.decrQuantity.bind(this);
     global.removeCart = this.removeCart.bind(this);
     global.gotoSearch = this.gotoSearch.bind(this);
-
 }
  
   static title = 'Custom indicator';
@@ -150,7 +149,7 @@ constructor(props) {
         },
       ]
     });
-    global.gotoSearch()
+    global.gotoSearch();
 }
 
   handleIndexChange = (index: number) =>
@@ -298,15 +297,11 @@ const styles = StyleSheet.create({
     flex: 1,
 
   },
-
   scene: {
     flex: 1,
-
-
   },
 
   tabbar: {
-    // FE2EC8
     backgroundColor: '#FE2EC8',
     overflow: 'hidden',
     elevation: 3,

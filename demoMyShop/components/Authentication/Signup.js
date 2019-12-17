@@ -7,7 +7,7 @@ import {
 import register from '../../api/register';
 
 import background from '../../assets/img/wallpaper.png';
-import dog from '../../assets/img/dog.png';
+import logo from '../../assets/img/logo.png';
 import IconUser from '../../assets/img/username.png';
 import Iconpass from '../../assets/img/password.png';
 import email from '../../assets/img/email.png';
@@ -74,7 +74,7 @@ export default class Signup extends Component {
 
     render() {
         const { wapper, imageback, box1, box2, box3,
-            text, text1, textInput, button, button1
+            text, textInput, button, button1
             , inactive, createAcc, iconInput
         } = styles;
 
@@ -83,7 +83,7 @@ export default class Signup extends Component {
                 <ImageBackground style={imageback} source={background}>
                     <View style={box2}>
                         <View>
-                            <Image style={{ width: 150, height: 150, }} source={dog} />
+                            <Image style={{ width: 130, height: 130, }} source={logo} />
                         </View>
                         <Text style={text}>Mizu</Text>
                     </View>
@@ -141,24 +141,20 @@ export default class Signup extends Component {
                         </View>
                         {(this.checkRePass(this.state.password, this.state.repass) || this.state.repass === '') ? <Text style={{ height: 0 }} /> :
                             <Text style={styles.err}>Nhập lại mật khẩu không đúng</Text>}
-
-                         {/* <TouchableOpacity style={button} onPress={this.registerUser.bind(this)}>
-                            <Text style={text1}>SIGN UP</Text>
-                        </TouchableOpacity> */}
-                        
-                        {(this.props.passwordValidation(this.state.password) && this.props.emailValidation(this.state.email) && 
-                        this.props.usernameValidation(this.state.username) && this.checkRePass(this.state.password, this.state.repass) )?
+                        {(this.props.passwordValidation(this.state.password) && this.props.emailValidation(this.state.email) &&
+                            this.props.usernameValidation(this.state.username) && this.checkRePass(this.state.password, this.state.repass)) ?
                             <TouchableOpacity
-                            style={button}
-                            onPress = {this.registerUser.bind(this)}>
-                            <Text style={styles.text1}>Đăng kí</Text>
-                            </TouchableOpacity>:
+                                style={button}
+                                onPress={this.registerUser.bind(this)}>
+                                <Text style={styles.text1}>Đăng kí</Text>
+                            </TouchableOpacity> :
                             <TouchableOpacity
-                            disabled={true}
-                            style={button1}>
-                            <Text style={styles.text1}>Đăng kí</Text>
+                                disabled={true}
+                                style={button1}
+                            >
+                                <Text style={styles.text1}>Đăng kí</Text>
                             </TouchableOpacity>}
-                        
+
                     </View>
                     <View style={box3}>
                         <TouchableOpacity style={createAcc} onPress={() => this.props.gotoLogin()} >
@@ -175,7 +171,6 @@ export default class Signup extends Component {
 const styles = StyleSheet.create({
     wapper: {
         flex: 1,
-
     },
     box1: {
         flex: 3,
@@ -197,10 +192,8 @@ const styles = StyleSheet.create({
         height: 28,
         marginRight: 10
     },
-
     text: {
-
-        fontSize: 30,
+        fontSize: 32,
         color: 'white',
     },
     //ACTIVE

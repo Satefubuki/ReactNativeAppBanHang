@@ -40,7 +40,7 @@ export default class App extends Component {
     } else {
       return (
         <Navigator
-          initialRoute={{ name: 'MenuAdmin' }}
+          initialRoute={{ name: 'Main' }}
           renderScene={(route, navigator) => {
             switch (route.name) {
               case 'Main': return <Main navigator={navigator} />;
@@ -52,7 +52,7 @@ export default class App extends Component {
               case 'SignUp': return <Signup navigator={navigator} />;
               case 'Forgot': return <Forgot navigator={navigator} />;
               case 'HomeAdmin': return <HomeAdmin navigator={navigator} />;
-              case 'MenuAdmin': return <MenuAdmin />;
+              case 'MenuAdmin': return <MenuAdmin navigator={navigator} />;
               default: return <OrderHistory />;
             }
           }}

@@ -79,11 +79,10 @@ export default class Authentication extends Component {
     }
     render() {
         const { islogin, } = this.state;
-        // gotoSignup = {this.gotoSignup.bind(this)}
-        
+        // gotoSignup = {this.gotoSignup.bind(this)} 
         const main = islogin ? 
         <Login 
-            gotoAddProduct={this.gotoAddProduct.bind(this)}
+            gotoAdmin={this.gotoAdmin.bind(this)}
             goBacktoMain={this.goBacktoMain.bind(this)}
             gotoSignup={this.gotoSignup.bind(this)}
             emailValidation={this.emailValidation.bind(this)}

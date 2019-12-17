@@ -2,11 +2,12 @@
 import React, { Component } from 'react';
 import {
     View, Text, TouchableOpacity,
-    StyleSheet, Image, Dimensions
+    StyleSheet, Image, Dimensions, ImageBackground
 } from 'react-native';
 
 import back from '../../../assets/img/left.png';
 import check from '../../../assets/img/check.png';
+import upload from '../../../assets/img/upload.png';
 
 const { width, height } = Dimensions.get('window');
 
@@ -14,7 +15,8 @@ const { width, height } = Dimensions.get('window');
 export default class AddPproduct extends Component {
     render() {
         const { container, header,
-            imgHeader, txtHeader, imgCheck, body } = styles;
+            imgHeader, txtHeader, imgCheck,
+             body, uploadimg, addView, txtImg } = styles;
         return (
             <View style={container}>
                 <View style={header}>
@@ -27,7 +29,13 @@ export default class AddPproduct extends Component {
                     </TouchableOpacity>
                 </View>
                 <View style={body}>
-
+                    <View style={addView}>
+                        <TouchableOpacity>
+                            <ImageBackground style={uploadimg} source={upload} >
+                                <Text style={txtImg}>+Thêm hình ảnh</Text>
+                            </ImageBackground>
+                        </TouchableOpacity>
+                    </View>
                 </View>
             </View>
         );
@@ -61,13 +69,32 @@ const styles = StyleSheet.create({
         width: 30,
         height: 30,
     },
+    addView: {
+
+    },
     txtHeader: {
         color: '#fff',
         fontSize: 20,
         fontWeight: '100',
         marginRight: 60
     },
+    txtImg: {
+        margin: 10,
+        marginTop: ,
+        fontSize: 22,
+        color: 'violet',
+        fontWeight: 'bold',
+        textAlign: 'center',
+        justifyContent: 'center' 
+    },
+    uploadimg: {
+        width: 200,
+        height: 200,
+        flex: 1
+    },
     body: {
-        
+        flex: 1,
+
+
     }
 });

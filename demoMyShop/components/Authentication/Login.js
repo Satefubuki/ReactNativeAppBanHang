@@ -144,7 +144,6 @@ export default class Login extends Component {
                             <Text style={{ color: '#BDBDBD', fontSize: 15 }}>Quay lại</Text>
                         </TouchableOpacity>
                     </View>
-
                 </ImageBackground>
             </View>
         );

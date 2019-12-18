@@ -7,7 +7,7 @@ import global from '../../../global';
 import back from '../../../../assets/img/back.png';
 import cart from '../../../../assets/img/cart.png';
 
-const url= 'http://192.168.1.3/app/images/product/';
+const url = 'http://192.168.1.7/app/images/product/';
 
 export default class ProductDetail extends Component {
     goBack() {

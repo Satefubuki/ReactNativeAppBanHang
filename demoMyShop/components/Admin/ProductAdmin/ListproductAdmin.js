@@ -24,30 +24,34 @@ export default class ListproductAdmin extends Component {
         };
         this.arr = [];
     }
-//load data từ DB
+    //load data từ DB
     componentDidMount() {
         getProductAdmin()
-        .then(arrProduct => {
-            this.arr = arrProduct;
-            // console.log(arrProduct);
-            this.setState({
-                ...this.state,
-                listProduct: this.arr,
+            .then(arrProduct => {
+                this.arr = arrProduct;
+                // console.log(arrProduct);
+                this.setState({
+                    ...this.state,
+                    listProduct: this.arr,
+                });
             });
-        });       
     }
 
     gotoAddProduct() {
         const { navigator } = this.props;
         navigator.push({ name: 'Add_ProductAD' });
     }
+    gotoEditProduct() {
+        const { navigator } = this.props;
+        navigator.push({ name: 'Edit_ProductAD' });
+    }
 
     render() {
         const { listProduct } = this.state;
-        const { container, wapper, body, wapperBody, 
+        const { container, wapper, body, wapperBody,
             img1, img2, buttonAdd, txtAdd, proContainer,
             proImg, productInfo, txtName, txtUnit,
-             txtShowDetail, lastRowInfo, txtPrice, txtColor } = styles;
+            txtShowDetail, lastRowInfo, txtPrice, txtColor } = styles;
         return (
             <View style={container}>
                 <View style={wapper}>
@@ -68,35 +72,35 @@ export default class ListproductAdmin extends Component {
                     </View>
                 </View>
                 <View style={body}>
-                            <TouchableOpacity style={buttonAdd} onPress={this.gotoAddProduct.bind(this)}>
-                                <View style={{ flexDirection: 'row' }}>
-                                    <Text style={txtAdd}>Đăng sản phẩm mới</Text>
-                                    <Image style={img1} source={IconAdd} />
-                                </View>
-                            </TouchableOpacity>
-                            <View style={wapperBody}>
+                    <TouchableOpacity style={buttonAdd} onPress={this.gotoAddProduct.bind(this)}>
+                        <View style={{ flexDirection: 'row' }}>
+                            <Text style={txtAdd}>Đăng sản phẩm mới</Text>
+                            <Image style={img1} source={IconAdd} />
+                        </View>
+                    </TouchableOpacity>
+                    <View style={wapperBody}>
                         <FlatList
                             removeClippedSubviews={false}
                             data={listProduct}
                             renderItem={({ item }) => (
                                 <View style={proContainer}>
-                                <Image source={{ uri: `${url}${item.images[0]}` }} style={proImg} />
-                                <View style={productInfo}>
-                                    <Text style={txtName}>{item.name}</Text>
-                                    <View style={{ flexDirection: "row" }}>
-                                        <Text style={txtUnit}>đ</Text>
-                                        <Text style={txtPrice}>{item.price}.000</Text>
-                                    </View>
-                                    <View style={lastRowInfo}>
-                                        <Text style={txtColor} />
-                                        <TouchableOpacity onPress={() => { this.goToDetail(item) }}>
-                                            <Text style={txtShowDetail}>Show Detail</Text>
-                                        </TouchableOpacity>
+                                    <Image source={{ uri: `${url}${item.images[0]}` }} style={proImg} />
+                                    <View style={productInfo}>
+                                        <Text style={txtName}>{item.name}</Text>
+                                        <View style={{ flexDirection: "row" }}>
+                                            <Text style={txtUnit}>đ</Text>
+                                            <Text style={txtPrice}>{item.price}.000</Text>
+                                        </View>
+                                        <View style={lastRowInfo}>
+                                            <Text style={txtColor} />
+                                            <TouchableOpacity onPress={() => { this.gotoEditProduct(item) }}>
+                                                <Text style={txtShowDetail}>Cập nhật</Text>
+                                            </TouchableOpacity>
+                                        </View>
                                     </View>
                                 </View>
-                                </View>
-                            )}  
-                            keyExtractor={(item, index) => index.toString()}                    
+                            )}
+                            keyExtractor={(item, index) => index.toString()}
                         />
                     </View>
                 </View>
@@ -122,7 +126,6 @@ const styles = StyleSheet.create({
         backgroundColor: 'white',
         padding: 10,
         paddingBottom: 10,
-        
     },
     wapperBody: {
         backgroundColor: 'white',

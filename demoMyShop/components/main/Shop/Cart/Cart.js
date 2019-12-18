@@ -17,7 +17,7 @@ class Cart extends Component {
                 case 'CART_VIEW': 
                     return <CartView navigator={navigator} carts={carts} />;
                 case 'PRODUCT_DETAIL': 
-                    return <ProductDetail navigator={navigator} />; 
+                    return <ProductDetail navigator={navigator} product={route.product} />; 
             }
            }}
            />

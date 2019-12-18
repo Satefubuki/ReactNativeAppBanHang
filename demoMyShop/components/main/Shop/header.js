@@ -4,7 +4,7 @@ import React, { Component } from 'react';
 import { View, Dimensions, TouchableOpacity, 
     TextInput, Image, StatusBar, StyleSheet } from 'react-native';
     
-import Avarta from '../../../assets/img/tabbar.png';
+import Menu from '../../../assets/img/cate.png';
 import IconS from '../../../assets/img/iconSearch.png';
 import global from '../../global';
 import searchProduct from '../../../api/searchProduct';
@@ -34,7 +34,7 @@ onSearch = () => {
             <View style={styles.wapper}>
                 <View style={{ width: width / 7, alignItems: "center" }}>
                     <TouchableOpacity onPress={this.props.onOpen}>
-                        <Image style={styles.img1} source={Avarta} />
+                        <Image style={styles.img1} source={Menu} />
                     </TouchableOpacity>
                 </View>
                 <View style={{ flex: 1, flexDirection: "row" }}>

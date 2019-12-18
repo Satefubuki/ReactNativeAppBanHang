@@ -14,7 +14,7 @@ class HomeAdmin extends Component {
         // const { topProducts } = this.props;
         return (
             <Navigator
-                initialRoute={{ name: 'Add_ProductAD' }}
+                initialRoute={{ name: 'List_ProductAD' }}
                 renderScene={(route, navigator) => {
                     switch (route.name) {
                         case 'List_ProductAD': return <ListProductAdmin navigator={navigator} />;

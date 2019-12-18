@@ -1,26 +1,31 @@
 import React, { Component } from 'react';
 import { Text, View, StyleSheet, ImageBackground, Dimensions } from 'react-native';
+import background from '../../../assets/img/14.png';
 
 const SCREEN_HEIGHT = Dimensions.get('window').height;
 
 class SplashScreen extends Component {
   render() {
-    const { container, imgBackground, textStyles } = styles;
+    const { container, imgBackground, } = styles;
     return (
       <View style={container}>
         <ImageBackground
           style={imgBackground}
           resizeMode='cover'
-          source={{ uri: 'https://oatcosmetics.com/wp-content/uploads/2015/12/Colour-Cosmetics-Face_small-600x400.png' }} >
-          <Text style={textStyles}>
+          source={background} >
+          {/* <Text style={textStyles}>
             Mizu Cosmetic App
-          </Text>
+          </Text> */}
         </ImageBackground>
       </View >
     );
   }
 }
 export default SplashScreen;
+
+//const imageWidth = width - 20;
+//const imageHeight = (imageWidth / 600) * 400;
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -38,9 +43,9 @@ const styles = StyleSheet.create({
     justifyContent: 'center'
   },
   imgBackground: {
-    // opacity: 0.4,
+    opacity: 0.7,
     width: '100%',
     height: '100%',
-    flex: 1
+    //flex: 1
   },
 });

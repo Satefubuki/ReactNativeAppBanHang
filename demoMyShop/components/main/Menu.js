@@ -8,7 +8,7 @@ import {
 import global from '../global';
 import saveToken from '../../api/saveToken';
 import bun from '../../assets/img/bun.jpg';
-import login1 from '../../assets/img/login1.png';
+import login1 from '../../assets/img/user.png';
 //import saveCart from '../api/saveCart';
 
 class Menu extends Component {
@@ -128,11 +128,11 @@ const styles = StyleSheet.create({
         marginBottom: 8
     },
     text: {
-        color: '#9D47AB',
+        color: '#FE2EC8',
         fontSize: 18,
     },
     textSignIn: {
-        color: '#9D47AB',
+        color: '#FE2EC8',
         fontSize: 15,
 
     },

@@ -19,7 +19,8 @@ class HomeAdmin extends Component {
                     switch (route.name) {
                         case 'List_ProductAD': return <ListProductAdmin navigator={navigator} />;
                         case 'Add_ProductAD': return <AddProductAdmin navigator={navigator} />;
-                        default: return <EditProductAdmin navigator={navigator} product={route.product} product={route.product} category={route.category} />;
+                        case 'Edit_ProductAD': return <EditProductAdmin navigator={navigator} product={route.product} />;
+                        default: return <EditProductAdmin navigator={navigator} product={route.product} />;
                     }
                 }}
             />

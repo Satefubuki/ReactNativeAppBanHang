@@ -129,7 +129,6 @@ export default class Login extends Component {
                             <TouchableOpacity style={createAcc} onPress={() => this.props.gotoForgot()} >
                                 <Text style={inactive}>Quên mật khẩu</Text>
                             </TouchableOpacity>
-
                         </View>
                         <TouchableOpacity
                             style={{

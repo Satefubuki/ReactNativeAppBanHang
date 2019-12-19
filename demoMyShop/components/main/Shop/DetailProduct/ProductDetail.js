@@ -40,8 +40,8 @@ export default class ProductDetail extends Component {
                     </View>
                     <View style={imageContainer}>
                         <ScrollView style={{ flexDirection: 'row', padding: 10, height: swiperHeight }} horizontal >
-                            <Image source={{uri: `${url}${images[0]}` }} style={productImageStyle} />
-                            <Image source={{uri: `${url}${images[1]}` }} style={productImageStyle} />
+                            <Image source={{ uri: `${url}${images[0]}` }} style={productImageStyle} />
+                            <Image source={{ uri: `${url}${images[1]}` }} style={productImageStyle} />
                         </ScrollView>
                     </View>
                     <View style={footer}>

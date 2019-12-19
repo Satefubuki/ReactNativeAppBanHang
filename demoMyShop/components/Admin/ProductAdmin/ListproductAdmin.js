@@ -31,7 +31,7 @@ export default class ListproductAdmin extends Component {
                 this.arr = arrProduct;
                 // console.log(arrProduct);
                 this.setState({
-                    ...this.state,
+                    //...this.state,
                     listProduct: this.arr,
                 });
             });
@@ -41,9 +41,9 @@ export default class ListproductAdmin extends Component {
         const { navigator } = this.props;
         navigator.push({ name: 'Add_ProductAD' });
     }
-    gotoEditProduct() {
+    gotoEditProduct(product) {
         const { navigator } = this.props;
-        navigator.push({ name: 'Edit_ProductAD' });
+        navigator.push({ name: 'Edit_ProductAD', product });
     }
 
     render() {
@@ -141,7 +141,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         borderWidth: 0.5,
         borderColor: '#FE2EC8',
-        borderRadius: height / 2,
+        borderRadius: 15,
         elevation: 3,
         marginBottom: 7,
         //opacity: 0.4,

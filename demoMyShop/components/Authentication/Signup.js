@@ -26,8 +26,8 @@ export default class Signup extends Component {
 
     onSuccess() {
         Alert.alert(
-            'Notice',
-            'Sign Up Successfully',
+            'Thông báo',
+            'Đăng ký thành công',
             [
                 { text: 'OK', onPress: this.props.gotoLogin() },
             ],
@@ -37,8 +37,8 @@ export default class Signup extends Component {
 
     onFail() {
         Alert.alert(
-            'Notice',
-            'Email is used by user orther!!!',
+            'Thông báo',
+            'Emai! đã được sử dụng!!',
             [
                 { text: 'OK', onPress: this.resetEmail.bind(this) },
             ],
@@ -145,7 +145,8 @@ export default class Signup extends Component {
                             this.props.usernameValidation(this.state.username) && this.checkRePass(this.state.password, this.state.repass)) ?
                             <TouchableOpacity
                                 style={button}
-                                onPress={this.registerUser.bind(this)}>
+                                onPress={this.registerUser.bind(this)}
+                            >
                                 <Text style={styles.text1}>Đăng kí</Text>
                             </TouchableOpacity> :
                             <TouchableOpacity

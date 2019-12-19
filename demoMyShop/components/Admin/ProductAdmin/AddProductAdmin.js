@@ -2,7 +2,8 @@
 import React, { Component } from 'react';
 import {
     View, Text, TextInput, TouchableOpacity,
-    StyleSheet, Image, Dimensions, ImageBackground
+    StyleSheet, Image, Dimensions,
+    ImageBackground, Alert
 } from 'react-native';
 
 import back from '../../../assets/img/left.png';
@@ -10,23 +11,55 @@ import check from '../../../assets/img/check.png';
 import screen from '../../../assets/img/screen.png';
 import iconPrice from '../../../assets/img/iconprice.png';
 import cate from '../../../assets/img/cate.png';
-import right from '../../../assets/img/right.png'
+import right from '../../../assets/img/right.png';
+import addProductAdmin from '../../../api/addproduct';
 
-const { width, height } = Dimensions.get('window');
-
+const { height } = Dimensions.get('window');
 
 export default class AddPproduct extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            txtname: '',
-            txtDescription: '',
+            name: '',
+            description: '',
+            price: ''
         };
+    }
+    onSuccess() {
+        Alert.alert(
+            'Thông báo',
+            'Thêm sản phẩm thành công',
+            [
+                { text: 'OK', onPress: this.gotoBackList() },
+            ],
+            { cancelable: false },
+        );
+    }
+
+    onFail() {
+        Alert.alert(
+            'Thông báo',
+            'Thất bại!!',
+            [
+                { text: 'OK', onPress: this.gotoBackList() },
+            ],
+            { cancelable: false },
+        );
+    }
+    addProduct() {
+        const { name, price, description } = this.state;
+        addProductAdmin(name, price, description)
+            .then(res => {
+                if (res === 'THANH_CONG') return this.onSuccess();
+                return this.onFail;
+            })
+            .catch(err => console.log(err));
     }
     gotoBackList() {
         const { navigator } = this.props;
         navigator.pop();
     }
+   
     render() {
         const { container, header,
             imgHeader, txtHeader, imgCheck,
@@ -40,7 +73,7 @@ export default class AddPproduct extends Component {
                         <Image style={imgHeader} source={back} />
                     </TouchableOpacity>
                     <Text style={txtHeader}>Thêm sản phẩm</Text>
-                    <TouchableOpacity >
+                    <TouchableOpacity onPress={this.addProduct.bind(this)}>
                         <Image style={imgCheck} source={check} />
                     </TouchableOpacity>
                 </View>
@@ -55,8 +88,8 @@ export default class AddPproduct extends Component {
                         </View>
                         <View style={productContainer}>
                             <TextInput
-                                onChangeText={text => this.setState({ txtname: text })}
-                                value={this.state.txtname}
+                                onChangeText={text => this.setState({ name: text })}
+                                value={this.state.name}
                                 placeholder="Tên sản phẩm "
                                 placeholderTextColor="#A4A4A4"
                                 autoCorrect={false}
@@ -67,8 +100,8 @@ export default class AddPproduct extends Component {
                             <TextInput
                                 multiline
                                 numberOfLines={4}
-                                onChangeText={text => this.setState({ txtname: text })}
-                                value={this.state.txtname}
+                                onChangeText={text => this.setState({ description: text })}
+                                value={this.state.description}
                                 placeholder="Mô Tả sản phẩm và  "
                                 placeholderTextColor="#A4A4A4"
                                 autoCorrect={false}
@@ -81,14 +114,9 @@ export default class AddPproduct extends Component {
                                 <Text style={txtLabel}>Danh mục</Text>
                             </View>
                             <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                            <TextInput
-                                onChangeText={text => this.setState({ txtname: text })}
-                                value={this.state.txtname}
-                                placeholder="Chọn danh mục  "
-                                placeholderTextColor="#A4A4A4"
-                                autoCorrect={false}
-                                style={{ fontSize: 16 }}
-                            />
+                            <Text style={{ fontSize: 16, color: '#A4A4A4', marginRight: 3 }}>
+                                Chọn danh mục
+                            </Text>
                             <Image style={iconright} source={right} />
                             </View>
                         </View>
@@ -98,8 +126,8 @@ export default class AddPproduct extends Component {
                                 <Text style={txtLabel}>Đặt giá</Text>
                             </View>
                             <TextInput
-                                onChangeText={text => this.setState({ txtname: text })}
-                                value={this.state.txtname}
+                                onChangeText={text => this.setState({ price: text })}
+                                value={this.state.price}
                                 placeholder="Đặt giá  "
                                 placeholderTextColor="#A4A4A4"
                                 autoCorrect={false}

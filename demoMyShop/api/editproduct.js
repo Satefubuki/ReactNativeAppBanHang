@@ -8,7 +8,7 @@ const editproduct = (id, name, price, description) => (
         }, 
         body: JSON.stringify({ id, name, price, description }),
     })
-    .then(res => res.json())
+    .then(res => res.text())
     
 );
 module.exports = editproduct;

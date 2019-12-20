@@ -1,4 +1,3 @@
-/* eslint-disable react/jsx-boolean-value */
 /* eslint-disable react/no-multi-comp */
 /* eslint-disable no-extra-semi */
 import React, { Component } from 'react';
@@ -56,6 +55,16 @@ export default class EditProductAdmin extends Component {
             { cancelable: false },
         );
     }
+    onSuccessDelete() {
+        Alert.alert(
+            'Thông báo',
+            'Xóa sản phẩm thành công',
+            [
+                { text: 'OK', onPress: this.gotoBackList() },
+            ],
+            { cancelable: false },
+        );
+    }
 
     onFail() {
         Alert.alert(
@@ -73,8 +82,13 @@ export default class EditProductAdmin extends Component {
             'Bạn muốn xóa sản phẩm ?',
             [
                 { text: 'OK', onPress: this.deleteProduct.bind(this) },
+                {
+                    text: 'Cancel',
+                    onPress: () => console.log('Cancel Pressed'),
+                    style: 'cancel',
+                  },
             ],
-            { text: 'Cancel', cancelable: false },
+            { cancelable: false },
         );
     }
 
@@ -94,9 +108,10 @@ export default class EditProductAdmin extends Component {
     }
     editProduct() {
         const { id, txtname, price, txtdescription } = this.state;
-        console.log('name::::::', id, txtname);
+        //console.log('name::::::', id, txtname);
         editProductAdmin(id, txtname, price, txtdescription)
             .then(res => {
+                console.log(res);
                 if (res === 'THANH_CONG') return this.onSuccess();
                 return this.onFail();
             })
@@ -106,8 +121,8 @@ export default class EditProductAdmin extends Component {
         const { id } = this.state;
         deleteProductAdmin(id)
             .then(res => {
-                if (res === 'THANH_CONG') return console.log('sửa sp thành công');
-                return console.log('thất bại::::');
+                if (res === 'THANH_CONG') return console.log("Thanh cong ::::");
+                return this.onFail();
             })
             .catch(err => console.log(err));
     }

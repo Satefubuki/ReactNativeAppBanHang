@@ -8,7 +8,7 @@ const deleteproduct = (id) => (
         }, 
         body: JSON.stringify({ id }),
     })
-    .then(res => res.json())
+    .then(res => res.text())
     
 );
 module.exports = deleteproduct;
